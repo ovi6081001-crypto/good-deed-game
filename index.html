@@ -34,7 +34,8 @@ html,body{
     position:relative;
     width:100%;
     max-width:600px;
-    height:100vh;
+    height:100dvh;
+    min-height:100vh;
     margin:auto;
     overflow:hidden;
 
@@ -355,6 +356,10 @@ html,body{
         0 5px 10px rgba(0,0,0,.35);
 
     touch-action:none;
+    -webkit-tap-highlight-color:transparent;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
 }
 
 .control:active{
@@ -1195,25 +1200,45 @@ function moveRight(){
    TOUCH
 ===================================================== */
 
-leftButton.addEventListener(
-    "touchstart",
-    e=>{
-        e.preventDefault();
-        moveLeft();
-    },
-    {passive:false}
-);
+function stopTouchEvent(e){
+    if(e && e.cancelable) e.preventDefault();
+}
+
+function handleControlPress(direction, e){
+    stopTouchEvent(e);
+    if(e && e.currentTarget && e.pointerId !== undefined){
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch(err) {}
+    }
+    if(direction === "left") moveLeft();
+    else moveRight();
+}
+
+leftButton.addEventListener("pointerdown", e => handleControlPress("left", e), {passive:false});
+rightButton.addEventListener("pointerdown", e => handleControlPress("right", e), {passive:false});
+
+leftButton.addEventListener("touchstart", e => handleControlPress("left", e), {passive:false});
+rightButton.addEventListener("touchstart", e => handleControlPress("right", e), {passive:false});
+
+["touchmove","touchend","touchcancel"].forEach(type=>{
+    leftButton.addEventListener(type, stopTouchEvent, {passive:false});
+    rightButton.addEventListener(type, stopTouchEvent, {passive:false});
+});
 
 
-rightButton.addEventListener(
-    "touchstart",
-    e=>{
-        e.preventDefault();
-        moveRight();
-    },
-    {passive:false}
-);
 
+
+/* MOBILE TOUCH SAFETY */
+game.addEventListener("touchmove", e => {
+    if(e.cancelable) e.preventDefault();
+}, {passive:false});
+
+game.addEventListener("gesturestart", e => {
+    if(e.cancelable) e.preventDefault();
+}, {passive:false});
+
+document.addEventListener("contextmenu", e => {
+    if(e.target.closest("#game")) e.preventDefault();
+});
 
 /* =====================================================
    MOUSE
