@@ -334,7 +334,8 @@ html,body{
     justify-content:center;
     gap:40px;
 
-    z-index:80;
+    z-index:1000;
+    pointer-events:auto;
 }
 
 .control{
@@ -356,7 +357,9 @@ html,body{
         0 5px 10px rgba(0,0,0,.35);
 
     touch-action:none;
+    -ms-touch-action:none;
     -webkit-tap-highlight-color:transparent;
+    -webkit-touch-callout:none;
     cursor:pointer;
     appearance:none;
     -webkit-appearance:none;
@@ -1170,7 +1173,10 @@ function positionPlayer(){
         );
 
     player.style.left =
-        playerX+"px";
+        Math.round(playerX)+"px";
+
+    /* Force an immediate visual update */
+    player.style.transform = "translateZ(0)";
 }
 
 
@@ -1197,46 +1203,67 @@ function moveRight(){
 
 
 /* =====================================================
-   TOUCH
+   MOBILE / TOUCH CONTROLS
 ===================================================== */
 
-function stopTouchEvent(e){
-    if(e && e.cancelable) e.preventDefault();
-}
+/*
+   Android fix:
+   Use Pointer Events as the main control method.
+   This covers finger touch, mouse and stylus without
+   double-triggering on phones that support both pointer
+   and touch events.
+*/
 
-function handleControlPress(direction, e){
-    stopTouchEvent(e);
-    if(e && e.currentTarget && e.pointerId !== undefined){
-        try { e.currentTarget.setPointerCapture(e.pointerId); } catch(err) {}
+function handleMove(direction, e){
+    if(e){
+        if(e.cancelable) e.preventDefault();
+        e.stopPropagation();
     }
-    if(direction === "left") moveLeft();
-    else moveRight();
+
+    if(!gameRunning) return;
+
+    if(direction === "left"){
+        playerX -= 55;
+    }else{
+        playerX += 55;
+    }
+
+    positionPlayer();
 }
 
-leftButton.addEventListener("pointerdown", e => handleControlPress("left", e), {passive:false});
-rightButton.addEventListener("pointerdown", e => handleControlPress("right", e), {passive:false});
+/* Make the buttons very clearly tappable on Android */
+leftButton.style.touchAction = "none";
+rightButton.style.touchAction = "none";
 
-leftButton.addEventListener("touchstart", e => handleControlPress("left", e), {passive:false});
-rightButton.addEventListener("touchstart", e => handleControlPress("right", e), {passive:false});
-
-["touchmove","touchend","touchcancel"].forEach(type=>{
-    leftButton.addEventListener(type, stopTouchEvent, {passive:false});
-    rightButton.addEventListener(type, stopTouchEvent, {passive:false});
+leftButton.addEventListener("pointerdown", function(e){
+    handleMove("left", e);
 });
 
+rightButton.addEventListener("pointerdown", function(e){
+    handleMove("right", e);
+});
 
+/* Fallback for older Android browsers */
+leftButton.addEventListener("touchstart", function(e){
+    if(window.PointerEvent) return;
+    handleMove("left", e);
+}, {passive:false});
 
+rightButton.addEventListener("touchstart", function(e){
+    if(window.PointerEvent) return;
+    handleMove("right", e);
+}, {passive:false});
 
-/* MOBILE TOUCH SAFETY */
-game.addEventListener("touchmove", e => {
+/* Prevent the phone from scrolling/zooming while playing */
+game.addEventListener("touchmove", function(e){
     if(e.cancelable) e.preventDefault();
 }, {passive:false});
 
-game.addEventListener("gesturestart", e => {
+game.addEventListener("gesturestart", function(e){
     if(e.cancelable) e.preventDefault();
 }, {passive:false});
 
-document.addEventListener("contextmenu", e => {
+document.addEventListener("contextmenu", function(e){
     if(e.target.closest("#game")) e.preventDefault();
 });
 
@@ -1244,15 +1271,17 @@ document.addEventListener("contextmenu", e => {
    MOUSE
 ===================================================== */
 
-leftButton.addEventListener(
-    "mousedown",
-    moveLeft
-);
+leftButton.addEventListener("mousedown", function(e){
+    if(!window.PointerEvent){
+        moveLeft();
+    }
+});
 
-rightButton.addEventListener(
-    "mousedown",
-    moveRight
-);
+rightButton.addEventListener("mousedown", function(e){
+    if(!window.PointerEvent){
+        moveRight();
+    }
+});
 
 
 /* =====================================================
