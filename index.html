@@ -1,9 +1,6 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -16,49 +13,31 @@
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-
     user-select:none;
     -webkit-user-select:none;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
-
-html,
-body{
-
+html,body{
     width:100%;
     height:100%;
-
     overflow:hidden;
-
     background:#111;
-
-    font-family:
-        "Noto Sans Bengali",
-        Arial,
-        sans-serif;
-
-    touch-action:none;
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
 }
 
+body{
+    touch-action:none;
+}
 
 /* =====================================================
    GAME
 ===================================================== */
 
 #game{
-
     position:relative;
 
     width:100%;
@@ -71,6 +50,9 @@ body{
 
     overflow:hidden;
 
+    touch-action:none;
+    -ms-touch-action:none;
+
     background:
         linear-gradient(
             #6ec9ff 0%,
@@ -78,44 +60,31 @@ body{
             #79c96b 49%,
             #3d963e 100%
         );
-
-    touch-action:none;
 }
-
 
 /* =====================================================
    SKY
 ===================================================== */
 
 #moon{
-
     position:absolute;
-
     right:25px;
     top:65px;
-
     font-size:55px;
 }
 
-
 .star{
-
     position:absolute;
-
     color:white;
-
     font-size:18px;
 }
-
 
 /* =====================================================
    HEADER
 ===================================================== */
 
 #header{
-
     position:absolute;
-
     top:0;
     left:0;
 
@@ -124,7 +93,6 @@ body{
     padding:9px;
 
     display:flex;
-
     justify-content:space-between;
 
     background:rgba(255,255,255,.9);
@@ -132,21 +100,19 @@ body{
     z-index:50;
 
     font-weight:bold;
+
+    pointer-events:none;
 }
 
-
 .stat{
-
     font-size:14px;
 }
 
-
 /* =====================================================
-   LEVEL BAR
+   LEVEL
 ===================================================== */
 
 #levelBar{
-
     position:absolute;
 
     top:48px;
@@ -162,27 +128,22 @@ body{
     overflow:hidden;
 
     z-index:50;
+
+    pointer-events:none;
 }
 
-
 #levelProgress{
-
     width:0%;
-
     height:100%;
 
     background:#087f23;
-
-    transition:width:.2s ease;
 }
-
 
 /* =====================================================
    FAMILY
 ===================================================== */
 
 #family{
-
     position:absolute;
 
     bottom:120px;
@@ -196,9 +157,7 @@ body{
     z-index:8;
 }
 
-
 .character{
-
     position:absolute;
 
     bottom:0;
@@ -214,9 +173,7 @@ body{
         );
 }
 
-
 .character .head{
-
     position:absolute;
 
     top:5px;
@@ -234,9 +191,7 @@ body{
     z-index:3;
 }
 
-
 .character .hair{
-
     position:absolute;
 
     top:1px;
@@ -247,15 +202,12 @@ body{
 
     background:#21160f;
 
-    border-radius:
-        50% 50% 20% 20%;
+    border-radius:50% 50% 20% 20%;
 
     z-index:5;
 }
 
-
 .character .body{
-
     position:absolute;
 
     top:43px;
@@ -264,21 +216,15 @@ body{
     width:54px;
     height:60px;
 
-    border-radius:
-        20px 20px 10px 10px;
+    border-radius:20px 20px 10px 10px;
 
-    border:
-        3px solid rgba(0,0,0,.3);
+    border:3px solid rgba(0,0,0,.3);
 
     box-shadow:
-        inset
-        0 8px 10px
-        rgba(255,255,255,.25);
+        inset 0 8px 10px rgba(255,255,255,.25);
 }
 
-
 .character .legs{
-
     position:absolute;
 
     top:100px;
@@ -292,9 +238,7 @@ body{
     border-radius:8px;
 }
 
-
 .character .legs2{
-
     position:absolute;
 
     top:100px;
@@ -308,9 +252,7 @@ body{
     border-radius:8px;
 }
 
-
 .character .label{
-
     position:absolute;
 
     top:130px;
@@ -318,29 +260,20 @@ body{
     width:100%;
 
     font-size:11px;
-
     font-weight:bold;
 
     color:#073b18;
 }
 
-
-/* =====================================================
-   FAMILY POSITIONS
-===================================================== */
-
 #father{
     left:7%;
 }
-
 
 #mother{
     left:31%;
 }
 
-
 #daughter1{
-
     left:54%;
 
     transform:scale(.78);
@@ -348,16 +281,13 @@ body{
     transform-origin:bottom;
 }
 
-
 #daughter2{
-
     left:73%;
 
     transform:scale(.72);
 
     transform-origin:bottom;
 }
-
 
 /* =====================================================
    COLORS
@@ -367,35 +297,29 @@ body{
     background:#168447;
 }
 
-
 #mother .body{
     background:#9b4cc7;
 }
-
 
 #daughter1 .body{
     background:#ff7191;
 }
 
-
 #daughter2 .body{
     background:#ffb52e;
 }
 
-
 /* =====================================================
-   FALLING OBJECTS
+   OBJECTS
 ===================================================== */
 
 .object{
-
     position:absolute;
 
     width:55px;
     height:55px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -411,13 +335,11 @@ body{
     pointer-events:none;
 }
 
-
 /* =====================================================
-   PLAYER / GOOD DEEDS BOX
+   GOOD DEEDS PLAYER
 ===================================================== */
 
 #player{
-
     position:absolute;
 
     bottom:75px;
@@ -437,51 +359,32 @@ body{
     color:white;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     font-size:11px;
-
     font-weight:bold;
 
     z-index:30;
 
     box-shadow:
-        0 5px 12px
-        rgba(0,0,0,.4);
+        0 5px 12px rgba(0,0,0,.4);
 
     /*
-       IMPORTANT:
-       Allow finger dragging on the player.
+       VERY IMPORTANT FOR ANDROID
     */
-
     touch-action:none;
+    -ms-touch-action:none;
+    -webkit-touch-callout:none;
 
-    -webkit-user-select:none;
-    user-select:none;
-
-    cursor:grab;
-
-    will-change:left;
+    cursor:pointer;
 }
-
-
-#player:active{
-
-    cursor:grabbing;
-
-    transform:
-        scale(1.03);
-}
-
 
 /* =====================================================
    CONTROLS
 ===================================================== */
 
 #controls{
-
     position:absolute;
 
     bottom:5px;
@@ -490,7 +393,6 @@ body{
     width:100%;
 
     display:flex;
-
     justify-content:center;
 
     gap:40px;
@@ -502,9 +404,7 @@ body{
     touch-action:none;
 }
 
-
 .control{
-
     width:90px;
     height:62px;
 
@@ -520,38 +420,29 @@ body{
     font-size:32px;
 
     box-shadow:
-        0 5px 10px
-        rgba(0,0,0,.35);
+        0 5px 10px rgba(0,0,0,.35);
 
     touch-action:none;
-
     -ms-touch-action:none;
 
-    -webkit-tap-highlight-color:
-        transparent;
-
+    -webkit-tap-highlight-color:transparent;
     -webkit-touch-callout:none;
 
     cursor:pointer;
 
     appearance:none;
-
     -webkit-appearance:none;
 }
 
-
 .control:active{
-
     transform:scale(.9);
 }
-
 
 /* =====================================================
    MESSAGE
 ===================================================== */
 
 #message{
-
     position:absolute;
 
     top:85px;
@@ -561,7 +452,6 @@ body{
     text-align:center;
 
     font-size:24px;
-
     font-weight:bold;
 
     opacity:0;
@@ -571,45 +461,34 @@ body{
     pointer-events:none;
 }
 
-
 .messageShow{
-
     animation:
         messageAnimation .9s ease;
 }
 
-
 @keyframes messageAnimation{
 
     0%{
-
         opacity:0;
-
         transform:scale(.5);
     }
 
     30%{
-
         opacity:1;
-
         transform:scale(1.2);
     }
 
     100%{
-
         opacity:0;
-
         transform:scale(1);
     }
 }
-
 
 /* =====================================================
    OVERLAY
 ===================================================== */
 
 #overlay{
-
     position:absolute;
 
     inset:0;
@@ -629,11 +508,8 @@ body{
     touch-action:auto;
 }
 
-
 #panel{
-
     width:94%;
-
     max-width:450px;
 
     max-height:90vh;
@@ -649,13 +525,10 @@ body{
     text-align:center;
 
     box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.5);
+        0 15px 40px rgba(0,0,0,.5);
 }
 
-
 #panel h1{
-
     color:#087f23;
 
     margin-bottom:10px;
@@ -663,17 +536,13 @@ body{
     font-size:28px;
 }
 
-
 #panel p{
-
     line-height:1.7;
 
     margin-bottom:18px;
 }
 
-
 .mainButton{
-
     width:100%;
 
     padding:14px;
@@ -689,48 +558,38 @@ body{
     color:white;
 
     font-size:18px;
-
     font-weight:bold;
 
-    touch-action:manipulation;
+    touch-action:auto;
 }
-
 
 .secondaryButton{
-
     background:#555;
 }
-
 
 /* =====================================================
    FAMILY PREVIEW
 ===================================================== */
 
 #familyPreview{
-
     display:flex;
 
     justify-content:center;
 
     gap:12px;
 
-    margin:
-        10px 0 20px;
+    margin:10px 0 20px;
 }
-
 
 .preview{
-
     font-size:35px;
 }
-
 
 /* =====================================================
    MISSION
 ===================================================== */
 
 #missionBox{
-
     position:absolute;
 
     top:70px;
@@ -748,19 +607,18 @@ body{
     text-align:center;
 
     font-size:13px;
-
     font-weight:bold;
 
     z-index:45;
-}
 
+    pointer-events:none;
+}
 
 /* =====================================================
    LEADERBOARD
 ===================================================== */
 
 #leaderboard{
-
     text-align:left;
 
     margin-top:15px;
@@ -771,9 +629,7 @@ body{
     padding-top:10px;
 }
 
-
 .leader{
-
     display:flex;
 
     justify-content:space-between;
@@ -784,13 +640,11 @@ body{
         1px solid #ddd;
 }
 
-
 /* =====================================================
    LANDSCAPE
 ===================================================== */
 
 #landscape{
-
     display:none;
 
     position:fixed;
@@ -804,7 +658,6 @@ body{
     color:white;
 
     align-items:center;
-
     justify-content:center;
 
     text-align:center;
@@ -814,87 +667,64 @@ body{
     padding:30px;
 }
 
-
 @media(
     orientation:landscape
-) and (max-height:500px){
+    ) and (max-height:500px){
 
     #landscape{
-
         display:flex;
     }
 }
-
 
 /* =====================================================
    FAMILY WALK ANIMATION
 ===================================================== */
 
 #family .character{
-
     animation:
-        familyWalk
-        0.55s
-        ease-in-out
-        infinite
-        alternate;
+        familyWalk 0.55s ease-in-out infinite alternate;
 }
 
-
 #family .character:nth-child(2){
-
     animation-delay:.12s;
 }
 
-
 #family .character:nth-child(3){
-
     animation-delay:.24s;
 }
 
-
 #family .character:nth-child(4){
-
     animation-delay:.36s;
 }
-
 
 @keyframes familyWalk{
 
     from{
-
         transform:
             translateY(0)
             rotate(-1deg);
     }
 
     to{
-
         transform:
             translateY(-5px)
             rotate(1deg);
     }
 }
 
-
 #family .character:nth-child(3){
-
     animation-name:
         familyWalkSmall;
 }
 
-
 #family .character:nth-child(4){
-
     animation-name:
         familyWalkSmall2;
 }
 
-
 @keyframes familyWalkSmall{
 
     from{
-
         transform:
             scale(.78)
             translateY(0)
@@ -902,19 +732,16 @@ body{
     }
 
     to{
-
         transform:
             scale(.78)
             translateY(-5px)
             rotate(2deg);
     }
 }
-
 
 @keyframes familyWalkSmall2{
 
     from{
-
         transform:
             scale(.72)
             translateY(0)
@@ -922,7 +749,6 @@ body{
     }
 
     to{
-
         transform:
             scale(.72)
             translateY(-5px)
@@ -930,350 +756,236 @@ body{
     }
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:600px){
-
-    #player{
-
-        width:120px;
-
-        height:45px;
-
-        font-size:12px;
-    }
-
-    .control{
-
-        width:95px;
-
-        height:65px;
-
-        font-size:34px;
-    }
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <div id="game">
 
+    <!-- SKY -->
 
-<!-- =====================================================
-     SKY
-===================================================== -->
+    <div id="moon">🌙</div>
 
-<div id="moon">🌙</div>
-
-<div class="star"
-     style="left:15%;top:100px">
-    ✦
-</div>
-
-<div class="star"
-     style="left:45%;top:125px">
-    ✦
-</div>
-
-<div class="star"
-     style="left:75%;top:145px">
-    ✦
-</div>
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<div id="header">
-
-    <div class="stat">
-        ⭐ <span id="score">0</span>
+    <div class="star"
+         style="left:15%;top:100px">
+        ✦
     </div>
 
-    <div class="stat">
-        🪙 <span id="coins">0</span>
+    <div class="star"
+         style="left:45%;top:125px">
+        ✦
     </div>
 
-    <div class="stat">
-        ❤️ <span id="lives">3</span>
+    <div class="star"
+         style="left:75%;top:145px">
+        ✦
     </div>
 
-    <div class="stat">
-        L<span id="level">1</span>
-    </div>
+    <!-- HEADER -->
 
-</div>
+    <div id="header">
 
+        <div class="stat">
+            ⭐ <span id="score">0</span>
+        </div>
 
-<!-- =====================================================
-     PROGRESS
-===================================================== -->
+        <div class="stat">
+            🪙 <span id="coins">0</span>
+        </div>
 
-<div id="levelBar">
+        <div class="stat">
+            ❤️ <span id="lives">3</span>
+        </div>
 
-    <div id="levelProgress"></div>
-
-</div>
-
-
-<!-- =====================================================
-     MISSION
-===================================================== -->
-
-<div id="missionBox">
-
-    🎯 মিশন:
-
-    <span id="mission">
-        ১০টি ভালো কাজ সংগ্রহ করুন
-    </span>
-
-</div>
-
-
-<!-- =====================================================
-     MESSAGE
-===================================================== -->
-
-<div id="message"></div>
-
-
-<!-- =====================================================
-     FAMILY
-===================================================== -->
-
-<div id="family">
-
-
-    <!-- FATHER -->
-
-    <div class="character"
-         id="father">
-
-        <div class="hair"></div>
-
-        <div class="head"></div>
-
-        <div class="body"></div>
-
-        <div class="legs"></div>
-
-        <div class="legs2"></div>
-
-        <div class="label">
-            বাবা
+        <div class="stat">
+            L<span id="level">1</span>
         </div>
 
     </div>
 
+    <!-- PROGRESS -->
 
-    <!-- MOTHER -->
+    <div id="levelBar">
 
-    <div class="character"
-         id="mother">
+        <div id="levelProgress"></div>
 
-        <div class="hair"></div>
+    </div>
 
-        <div class="head"></div>
+    <!-- MISSION -->
 
-        <div class="body"></div>
+    <div id="missionBox">
 
-        <div class="legs"></div>
+        🎯 মিশন:
 
-        <div class="legs2"></div>
+        <span id="mission">
+            ১০টি ভালো কাজ সংগ্রহ করুন
+        </span>
 
-        <div class="label">
-            মা
+    </div>
+
+    <!-- MESSAGE -->
+
+    <div id="message"></div>
+
+    <!-- FAMILY -->
+
+    <div id="family">
+
+        <!-- FATHER -->
+
+        <div class="character" id="father">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                বাবা
+            </div>
+
+        </div>
+
+        <!-- MOTHER -->
+
+        <div class="character" id="mother">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                মা
+            </div>
+
+        </div>
+
+        <!-- DAUGHTER 1 -->
+
+        <div class="character" id="daughter1">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                মেয়ে ১
+            </div>
+
+        </div>
+
+        <!-- DAUGHTER 2 -->
+
+        <div class="character" id="daughter2">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                মেয়ে ২
+            </div>
+
         </div>
 
     </div>
 
+    <!-- =================================================
+         GOOD DEEDS PLAYER
+    ================================================== -->
 
-    <!-- DAUGHTER 1 -->
-
-    <div class="character"
-         id="daughter1">
-
-        <div class="hair"></div>
-
-        <div class="head"></div>
-
-        <div class="body"></div>
-
-        <div class="legs"></div>
-
-        <div class="legs2"></div>
-
-        <div class="label">
-            মেয়ে ১
-        </div>
-
+    <div id="player">
+        GOOD DEEDS
     </div>
 
+    <!-- =================================================
+         BUTTON CONTROLS
+    ================================================== -->
 
-    <!-- DAUGHTER 2 -->
-
-    <div class="character"
-         id="daughter2">
-
-        <div class="hair"></div>
-
-        <div class="head"></div>
-
-        <div class="body"></div>
-
-        <div class="legs"></div>
-
-        <div class="legs2"></div>
-
-        <div class="label">
-            মেয়ে ২
-        </div>
-
-    </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     PLAYER
-===================================================== -->
-
-<div id="player">
-
-    GOOD DEEDS
-
-</div>
-
-
-<!-- =====================================================
-     BUTTON CONTROLS
-===================================================== -->
-
-<div id="controls">
-
-    <button
-        class="control"
-        id="left">
-
-        ◀
-
-    </button>
-
-
-    <button
-        class="control"
-        id="right">
-
-        ▶
-
-    </button>
-
-</div>
-
-
-<!-- =====================================================
-     START / GAME OVER
-===================================================== -->
-
-<div id="overlay">
-
-    <div id="panel">
-
-        <h1>
-            🌙 আমাদের পরিবার
-        </h1>
-
-
-        <div id="familyPreview">
-
-            <span class="preview">
-                👨
-            </span>
-
-            <span class="preview">
-                👩
-            </span>
-
-            <span class="preview">
-                👧
-            </span>
-
-            <span class="preview">
-                👧
-            </span>
-
-        </div>
-
-
-        <p id="panelText">
-
-            ⭐ ভালো কাজ সংগ্রহ করুন
-            <br>
-
-            🪙 কয়েন সংগ্রহ করুন
-            <br>
-
-            💣 খারাপ জিনিস এড়িয়ে চলুন
-            <br>
-
-            🎯 ১০টি মিশন সম্পূর্ণ করুন
-            <br>
-
-            🏆 ১০টি লেভেল শেষ করুন
-
-        </p>
-
+    <div id="controls">
 
         <button
-            class="mainButton"
-            id="start">
-
-            ▶ খেলা শুরু করুন
-
+            class="control"
+            id="left">
+            ◀
         </button>
-
 
         <button
-            class="mainButton secondaryButton"
-            id="sound">
-
-            🔊 শব্দ চালু করুন
-
+            class="control"
+            id="right">
+            ▶
         </button>
 
+    </div>
 
-        <div id="leaderboard">
+    <!-- =================================================
+         START / GAME OVER
+    ================================================== -->
 
-            <b>
-                🏆 সেরা স্কোর
-            </b>
+    <div id="overlay">
 
-            <div id="scores"></div>
+        <div id="panel">
+
+            <h1>
+                🌙 আমাদের পরিবার
+            </h1>
+
+            <div id="familyPreview">
+
+                <span class="preview">👨</span>
+                <span class="preview">👩</span>
+                <span class="preview">👧</span>
+                <span class="preview">👧</span>
+
+            </div>
+
+            <p id="panelText">
+
+                ⭐ ভালো কাজ সংগ্রহ করুন<br>
+                🪙 কয়েন সংগ্রহ করুন<br>
+                💣 খারাপ জিনিস এড়িয়ে চলুন<br>
+                🎯 ১০টি মিশন সম্পূর্ণ করুন<br>
+                🏆 ১০টি লেভেল শেষ করুন
+
+            </p>
+
+            <button
+                class="mainButton"
+                id="start">
+
+                ▶ খেলা শুরু করুন
+
+            </button>
+
+            <button
+                class="mainButton secondaryButton"
+                id="sound">
+
+                🔊 শব্দ চালু করুন
+
+            </button>
+
+            <div id="leaderboard">
+
+                <b>🏆 সেরা স্কোর</b>
+
+                <div id="scores"></div>
+
+            </div>
 
         </div>
 
     </div>
 
 </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     LANDSCAPE WARNING
-===================================================== -->
 
 <div id="landscape">
 
@@ -1284,7 +996,6 @@ body{
 
 <script>
 
-
 /* =====================================================
    GAME VARIABLES
 ===================================================== */
@@ -1292,62 +1003,47 @@ body{
 const game =
     document.getElementById("game");
 
-
 const player =
     document.getElementById("player");
-
 
 const scoreElement =
     document.getElementById("score");
 
-
 const coinsElement =
     document.getElementById("coins");
-
 
 const livesElement =
     document.getElementById("lives");
 
-
 const levelElement =
     document.getElementById("level");
-
 
 const progressElement =
     document.getElementById("levelProgress");
 
-
 const missionElement =
     document.getElementById("mission");
-
 
 const messageElement =
     document.getElementById("message");
 
-
 const overlay =
     document.getElementById("overlay");
-
 
 const panelText =
     document.getElementById("panelText");
 
-
 const startButton =
     document.getElementById("start");
-
 
 const soundButton =
     document.getElementById("sound");
 
-
 const scoresElement =
     document.getElementById("scores");
 
-
 const leftButton =
     document.getElementById("left");
-
 
 const rightButton =
     document.getElementById("right");
@@ -1378,6 +1074,307 @@ let spawnInterval = 1100;
 let missionCount = 0;
 
 let soundEnabled = false;
+
+
+/* =====================================================
+   TOUCH / FINGER CONTROL
+===================================================== */
+
+let fingerActive = false;
+
+
+/*
+    Convert screen X position
+    into game X position.
+*/
+
+function movePlayerToFinger(clientX){
+
+    if(!gameRunning)
+        return;
+
+    const rect =
+        game.getBoundingClientRect();
+
+    /*
+       Finger X relative to game.
+    */
+
+    const fingerX =
+        clientX - rect.left;
+
+    /*
+       Put the CENTER of GOOD DEEDS
+       under the finger.
+    */
+
+    playerX =
+        fingerX -
+        (player.offsetWidth / 2);
+
+    /*
+       Keep player inside game.
+    */
+
+    positionPlayer();
+}
+
+
+/*
+    MAIN ANDROID TOUCH SYSTEM
+
+    Touch anywhere inside the game.
+
+    GOOD DEEDS immediately jumps
+    under the finger.
+
+    Drag finger:
+
+    GOOD DEEDS follows continuously.
+*/
+
+game.addEventListener(
+    "pointerdown",
+    function(e){
+
+        /*
+           Ignore the bottom buttons.
+        */
+
+        if(
+            e.target.closest("#controls")
+        ){
+            return;
+        }
+
+        /*
+           Ignore overlay.
+        */
+
+        if(
+            e.target.closest("#overlay")
+        ){
+            return;
+        }
+
+        if(!gameRunning)
+            return;
+
+        fingerActive = true;
+
+        if(
+            e.pointerType === "touch" ||
+            e.pointerType === "pen" ||
+            e.pointerType === "mouse"
+        ){
+
+            movePlayerToFinger(
+                e.clientX
+            );
+
+        }
+
+        /*
+           Capture the finger so
+           movement continues smoothly.
+        */
+
+        if(
+            game.setPointerCapture &&
+            e.pointerId !== undefined
+        ){
+
+            try{
+                game.setPointerCapture(
+                    e.pointerId
+                );
+            }catch(err){}
+
+        }
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    },
+    {passive:false}
+);
+
+
+/*
+    FOLLOW FINGER.
+*/
+
+game.addEventListener(
+    "pointermove",
+    function(e){
+
+        if(!fingerActive)
+            return;
+
+        if(!gameRunning)
+            return;
+
+        /*
+           Don't let buttons control
+           the full-screen movement.
+        */
+
+        if(
+            e.target.closest("#controls")
+        ){
+            return;
+        }
+
+        movePlayerToFinger(
+            e.clientX
+        );
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    },
+    {passive:false}
+);
+
+
+/*
+    FINGER RELEASE.
+*/
+
+game.addEventListener(
+    "pointerup",
+    function(e){
+
+        fingerActive = false;
+
+        if(
+            game.releasePointerCapture &&
+            e.pointerId !== undefined
+        ){
+
+            try{
+                game.releasePointerCapture(
+                    e.pointerId
+                );
+            }catch(err){}
+
+        }
+
+    },
+    {passive:false}
+);
+
+
+/*
+    CANCEL.
+*/
+
+game.addEventListener(
+    "pointercancel",
+    function(){
+
+        fingerActive = false;
+
+    },
+    {passive:false}
+);
+
+
+/*
+    Older Android fallback.
+
+    Only used when Pointer Events
+    are not supported.
+*/
+
+if(!window.PointerEvent){
+
+    game.addEventListener(
+        "touchstart",
+        function(e){
+
+            if(
+                e.target.closest("#controls") ||
+                e.target.closest("#overlay")
+            ){
+                return;
+            }
+
+            if(!gameRunning)
+                return;
+
+            fingerActive = true;
+
+            const touch =
+                e.touches[0];
+
+            if(touch){
+
+                movePlayerToFinger(
+                    touch.clientX
+                );
+
+            }
+
+            if(e.cancelable)
+                e.preventDefault();
+
+        },
+        {passive:false}
+    );
+
+
+    game.addEventListener(
+        "touchmove",
+        function(e){
+
+            if(!fingerActive)
+                return;
+
+            if(!gameRunning)
+                return;
+
+            const touch =
+                e.touches[0];
+
+            if(touch){
+
+                movePlayerToFinger(
+                    touch.clientX
+                );
+
+            }
+
+            if(e.cancelable)
+                e.preventDefault();
+
+        },
+        {passive:false}
+    );
+
+
+    game.addEventListener(
+        "touchend",
+        function(){
+
+            fingerActive = false;
+
+        },
+        {passive:false}
+    );
+
+
+    game.addEventListener(
+        "touchcancel",
+        function(){
+
+            fingerActive = false;
+
+        },
+        {passive:false}
+    );
+
+}
 
 
 /* =====================================================
@@ -1483,7 +1480,6 @@ function initAudio(){
     if(audioContext)
         return;
 
-
     audioContext =
         new (
             window.AudioContext ||
@@ -1501,40 +1497,30 @@ function beep(
     if(!soundEnabled)
         return;
 
-
     initAudio();
-
 
     const oscillator =
         audioContext.createOscillator();
 
-
     const gain =
         audioContext.createGain();
-
 
     oscillator.frequency.value =
         frequency;
 
-
     oscillator.type =
         "sine";
-
 
     gain.gain.value =
         0.06;
 
-
     oscillator.connect(gain);
-
 
     gain.connect(
         audioContext.destination
     );
 
-
     oscillator.start();
-
 
     oscillator.stop(
         audioContext.currentTime +
@@ -1553,17 +1539,13 @@ function startMusic(){
     if(!soundEnabled)
         return;
 
-
     if(musicTimer)
         return;
-
 
     const notes =
         [261,329,392,329,293,349,440,349];
 
-
     let index=0;
-
 
     musicTimer =
         setInterval(()=>{
@@ -1573,9 +1555,7 @@ function startMusic(){
                 .18
             );
 
-
             index++;
-
 
             if(index>=notes.length)
                 index=0;
@@ -1594,6 +1574,7 @@ function stopMusic(){
         );
 
         musicTimer=null;
+
     }
 
 }
@@ -1608,17 +1589,15 @@ function speak(text){
     if(!soundEnabled)
         return;
 
-
     if(!("speechSynthesis" in window))
         return;
 
-
     speechSynthesis.cancel();
 
-
     const speech =
-        new SpeechSynthesisUtterance(text);
-
+        new SpeechSynthesisUtterance(
+            text
+        );
 
     speech.lang="bn-BD";
 
@@ -1627,7 +1606,6 @@ function speak(text){
     speech.pitch=1;
 
     speech.volume=1;
-
 
     speechSynthesis.speak(
         speech
@@ -1652,45 +1630,36 @@ function startGame(){
 
     missionCount=0;
 
-
     objects.forEach(
         o=>o.element.remove()
     );
 
-
     objects=[];
-
 
     gameRunning=true;
 
+    fingerActive=false;
 
     overlay.style.display="none";
-
 
     updateLevel();
 
     updateDisplay();
 
-
     playerX =
         game.clientWidth/2 -
         player.offsetWidth/2;
 
-
     positionPlayer();
-
 
     lastSpawn =
         performance.now();
-
 
     speak(
         "খেলা শুরু হয়েছে। ভালো কাজ সংগ্রহ করুন।"
     );
 
-
     startMusic();
-
 
     animationFrame =
         requestAnimationFrame(
@@ -1710,7 +1679,6 @@ function positionPlayer(){
         game.clientWidth -
         player.offsetWidth;
 
-
     playerX =
         Math.max(
             0,
@@ -1720,9 +1688,15 @@ function positionPlayer(){
             )
         );
 
-
     player.style.left =
         Math.round(playerX)+"px";
+
+    /*
+       Force immediate rendering.
+    */
+
+    player.style.transform =
+        "translateZ(0)";
 
 }
 
@@ -1736,7 +1710,6 @@ function moveLeft(){
     if(!gameRunning)
         return;
 
-
     playerX-=45;
 
     positionPlayer();
@@ -1749,7 +1722,6 @@ function moveRight(){
     if(!gameRunning)
         return;
 
-
     playerX+=45;
 
     positionPlayer();
@@ -1758,369 +1730,84 @@ function moveRight(){
 
 
 /* =====================================================
-   BUTTON POINTER CONTROLS
+   BUTTON CONTROLS
 ===================================================== */
 
-function handleMove(direction,e){
+leftButton.style.touchAction="none";
 
-    if(e){
+rightButton.style.touchAction="none";
 
-        if(e.cancelable)
-            e.preventDefault();
+
+leftButton.addEventListener(
+    "pointerdown",
+    function(e){
+
+        e.preventDefault();
 
         e.stopPropagation();
 
-    }
+        moveLeft();
+
+    },
+    {passive:false}
+);
 
 
-    if(!gameRunning)
-        return;
+rightButton.addEventListener(
+    "pointerdown",
+    function(e){
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+        moveRight();
+
+    },
+    {passive:false}
+);
 
 
-    if(direction==="left"){
+/*
+   Older Android fallback.
+*/
 
-        playerX-=55;
+if(!window.PointerEvent){
 
-    }
-    else{
+    leftButton.addEventListener(
+        "touchstart",
+        function(e){
 
-        playerX+=55;
+            e.preventDefault();
 
-    }
+            e.stopPropagation();
+
+            moveLeft();
+
+        },
+        {passive:false}
+    );
 
 
-    positionPlayer();
+    rightButton.addEventListener(
+        "touchstart",
+        function(e){
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+            moveRight();
+
+        },
+        {passive:false}
+    );
 
 }
 
 
 /* =====================================================
-   LEFT BUTTON
-===================================================== */
-
-leftButton.addEventListener(
-    "pointerdown",
-    function(e){
-
-        handleMove(
-            "left",
-            e
-        );
-
-    }
-);
-
-
-/* =====================================================
-   RIGHT BUTTON
-===================================================== */
-
-rightButton.addEventListener(
-    "pointerdown",
-    function(e){
-
-        handleMove(
-            "right",
-            e
-        );
-
-    }
-);
-
-
-/* =====================================================
-   OLD ANDROID FALLBACK
-===================================================== */
-
-leftButton.addEventListener(
-    "touchstart",
-    function(e){
-
-        if(window.PointerEvent)
-            return;
-
-
-        handleMove(
-            "left",
-            e
-        );
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-rightButton.addEventListener(
-    "touchstart",
-    function(e){
-
-        if(window.PointerEvent)
-            return;
-
-
-        handleMove(
-            "right",
-            e
-        );
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-/* =====================================================
-   IMPORTANT:
-   GOOD DEEDS DRAG SYSTEM
-===================================================== */
-
-let draggingPlayer = false;
-
-let touchStartX = 0;
-
-let touchStartPlayerX = 0;
-
-
-/* =====================================================
-   POINTER DOWN
-===================================================== */
-
-player.addEventListener(
-    "pointerdown",
-    function(e){
-
-        if(!gameRunning)
-            return;
-
-
-        draggingPlayer = true;
-
-
-        touchStartX =
-            e.clientX;
-
-
-        touchStartPlayerX =
-            playerX;
-
-
-        player.setPointerCapture(
-            e.pointerId
-        );
-
-
-        if(e.cancelable)
-            e.preventDefault();
-
-    }
-);
-
-
-/* =====================================================
-   POINTER MOVE
-===================================================== */
-
-player.addEventListener(
-    "pointermove",
-    function(e){
-
-        if(!draggingPlayer)
-            return;
-
-
-        if(!gameRunning)
-            return;
-
-
-        const currentX =
-            e.clientX;
-
-
-        const deltaX =
-            currentX -
-            touchStartX;
-
-
-        playerX =
-            touchStartPlayerX +
-            deltaX;
-
-
-        positionPlayer();
-
-
-        if(e.cancelable)
-            e.preventDefault();
-
-    }
-);
-
-
-/* =====================================================
-   POINTER UP
-===================================================== */
-
-player.addEventListener(
-    "pointerup",
-    function(e){
-
-        draggingPlayer=false;
-
-
-        try{
-
-            player.releasePointerCapture(
-                e.pointerId
-            );
-
-        }
-        catch(err){}
-
-    }
-);
-
-
-/* =====================================================
-   POINTER CANCEL
-===================================================== */
-
-player.addEventListener(
-    "pointercancel",
-    function(){
-
-        draggingPlayer=false;
-
-    }
-);
-
-
-/* =====================================================
-   ANDROID TOUCH FALLBACK
-===================================================== */
-
-player.addEventListener(
-    "touchstart",
-    function(e){
-
-        if(window.PointerEvent)
-            return;
-
-
-        if(!gameRunning)
-            return;
-
-
-        if(e.touches.length!==1)
-            return;
-
-
-        draggingPlayer=true;
-
-
-        touchStartX =
-            e.touches[0].clientX;
-
-
-        touchStartPlayerX =
-            playerX;
-
-
-        if(e.cancelable)
-            e.preventDefault();
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-player.addEventListener(
-    "touchmove",
-    function(e){
-
-        if(window.PointerEvent)
-            return;
-
-
-        if(!draggingPlayer)
-            return;
-
-
-        if(e.touches.length!==1)
-            return;
-
-
-        const currentX =
-            e.touches[0].clientX;
-
-
-        const deltaX =
-            currentX -
-            touchStartX;
-
-
-        playerX =
-            touchStartPlayerX +
-            deltaX;
-
-
-        positionPlayer();
-
-
-        if(e.cancelable)
-            e.preventDefault();
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-player.addEventListener(
-    "touchend",
-    function(){
-
-        draggingPlayer=false;
-
-    }
-);
-
-
-player.addEventListener(
-    "touchcancel",
-    function(){
-
-        draggingPlayer=false;
-
-    }
-);
-
-
-/* =====================================================
-   PREVENT GAME SCROLL
-===================================================== */
-
-game.addEventListener(
-    "touchmove",
-    function(e){
-
-        if(e.cancelable)
-            e.preventDefault();
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-/* =====================================================
-   PREVENT ZOOM
+   PREVENT ZOOM / GESTURES
 ===================================================== */
 
 game.addEventListener(
@@ -2130,7 +1817,32 @@ game.addEventListener(
         if(e.cancelable)
             e.preventDefault();
 
-    }
+    },
+    {passive:false}
+);
+
+
+game.addEventListener(
+    "gesturechange",
+    function(e){
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    },
+    {passive:false}
+);
+
+
+game.addEventListener(
+    "gestureend",
+    function(e){
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    },
+    {passive:false}
 );
 
 
@@ -2138,34 +1850,13 @@ document.addEventListener(
     "contextmenu",
     function(e){
 
-        if(e.target.closest("#game"))
+        if(
+            e.target.closest("#game")
+        ){
+
             e.preventDefault();
 
-    }
-);
-
-
-/* =====================================================
-   MOUSE
-===================================================== */
-
-leftButton.addEventListener(
-    "mousedown",
-    function(){
-
-        if(!window.PointerEvent)
-            moveLeft();
-
-    }
-);
-
-
-rightButton.addEventListener(
-    "mousedown",
-    function(){
-
-        if(!window.PointerEvent)
-            moveRight();
+        }
 
     }
 );
@@ -2177,11 +1868,10 @@ rightButton.addEventListener(
 
 document.addEventListener(
     "keydown",
-    e=>{
+    function(e){
 
         if(e.key==="ArrowLeft")
             moveLeft();
-
 
         if(e.key==="ArrowRight")
             moveRight();
@@ -2199,13 +1889,10 @@ function createObject(){
     const element =
         document.createElement("div");
 
-
     element.className="object";
-
 
     const random =
         Math.random();
-
 
     let type;
 
@@ -2213,7 +1900,6 @@ function createObject(){
     if(random<.55){
 
         type="good";
-
 
         const good=[
 
@@ -2226,7 +1912,6 @@ function createObject(){
 
         ];
 
-
         element.textContent =
             good[
                 Math.floor(
@@ -2237,7 +1922,6 @@ function createObject(){
 
     }
 
-
     else if(random<.80){
 
         type="coin";
@@ -2246,11 +1930,9 @@ function createObject(){
 
     }
 
-
     else{
 
         type="bad";
-
 
         const bad=[
 
@@ -2259,7 +1941,6 @@ function createObject(){
             "☁️"
 
         ];
-
 
         element.textContent =
             bad[
@@ -2280,14 +1961,11 @@ function createObject(){
     element.style.left =
         x+"px";
 
-
     element.style.top =
         "-60px";
 
 
-    game.appendChild(
-        element
-    );
+    game.appendChild(element);
 
 
     objects.push({
@@ -2314,10 +1992,8 @@ function collision(obj){
     const a =
         player.getBoundingClientRect();
 
-
     const b =
         obj.element.getBoundingClientRect();
-
 
     return !(
         a.right<b.left ||
@@ -2337,10 +2013,8 @@ function showMessage(text){
 
     messageElement.textContent=text;
 
-
     messageElement.className=
         "messageShow";
-
 
     setTimeout(
         ()=>{
@@ -2372,7 +2046,6 @@ function gameLoop(timestamp){
     ){
 
         createObject();
-
 
         lastSpawn=timestamp;
 
@@ -2408,11 +2081,9 @@ function gameLoop(timestamp){
 
                 missionCount++;
 
-
                 showMessage(
                     "⭐ +১০"
                 );
-
 
                 beep(660,.15);
 
@@ -2425,11 +2096,9 @@ function gameLoop(timestamp){
 
                 score+=5;
 
-
                 showMessage(
                     "🪙 +১ কয়েন"
                 );
-
 
                 beep(880,.12);
 
@@ -2440,14 +2109,11 @@ function gameLoop(timestamp){
 
                 lives--;
 
-
                 showMessage(
                     "💣 জীবন -১"
                 );
 
-
                 beep(150,.25);
-
 
                 speak(
                     "সাবধান!"
@@ -2458,12 +2124,7 @@ function gameLoop(timestamp){
 
             obj.element.remove();
 
-
-            objects.splice(
-                i,
-                1
-            );
-
+            objects.splice(i,1);
 
             updateDisplay();
 
@@ -2479,7 +2140,6 @@ function gameLoop(timestamp){
                 return;
 
             }
-
 
             continue;
 
@@ -2513,11 +2173,7 @@ function gameLoop(timestamp){
 
             obj.element.remove();
 
-
-            objects.splice(
-                i,
-                1
-            );
+            objects.splice(i,1);
 
         }
 
@@ -2541,14 +2197,11 @@ function updateDisplay(){
     scoreElement.textContent =
         score;
 
-
     coinsElement.textContent =
         coins;
 
-
     livesElement.textContent =
         lives;
-
 
     levelElement.textContent =
         level;
@@ -2575,10 +2228,7 @@ function updateDisplay(){
 
 
     progressElement.style.width =
-        Math.max(
-            0,
-            percent
-        )+"%";
+        Math.max(0,percent)+"%";
 
 }
 
@@ -2620,10 +2270,6 @@ function updateLevel(){
 }
 
 
-/* =====================================================
-   CHECK LEVEL
-===================================================== */
-
 function checkLevel(){
 
     if(level>=10){
@@ -2636,7 +2282,6 @@ function checkLevel(){
             endGame(true);
 
         }
-
 
         return;
 
@@ -2691,13 +2336,15 @@ function checkMission(){
         );
 
 
+        /*
+           Bonus
+        */
+
         coins+=5;
 
         score+=25;
 
-
         missionCount=0;
-
 
         updateDisplay();
 
@@ -2713,6 +2360,8 @@ function checkMission(){
 function endGame(won){
 
     gameRunning=false;
+
+    fingerActive=false;
 
 
     cancelAnimationFrame(
@@ -2750,7 +2399,6 @@ function endGame(won){
 
     }
 
-
     else{
 
         panelText.innerHTML =
@@ -2775,7 +2423,6 @@ function endGame(won){
 
     saveScore();
 
-
     showLeaderboard();
 
 
@@ -2789,7 +2436,7 @@ function endGame(won){
 
 
 /* =====================================================
-   LEADERBOARD
+   LOCAL LEADERBOARD
 ===================================================== */
 
 function saveScore(){
@@ -2822,10 +2469,7 @@ function saveScore(){
 
 
     scores =
-        scores.slice(
-            0,
-            5
-        );
+        scores.slice(0,5);
 
 
     localStorage.setItem(
@@ -2850,7 +2494,6 @@ function showLeaderboard(){
 
         scoresElement.innerHTML =
             "<p>এখনও কোনো স্কোর নেই।</p>";
-
 
         return;
 
@@ -2885,7 +2528,7 @@ function showLeaderboard(){
 
 soundButton.addEventListener(
     "click",
-    ()=>{
+    function(){
 
         soundEnabled =
             !soundEnabled;
@@ -2919,7 +2562,6 @@ soundButton.addEventListener(
 
         }
 
-
         else{
 
             soundButton.textContent =
@@ -2950,11 +2592,10 @@ soundButton.addEventListener(
 
 startButton.addEventListener(
     "click",
-    ()=>{
+    function(){
 
         if(soundEnabled)
             initAudio();
-
 
         startGame();
 
@@ -3000,44 +2641,19 @@ function shareGame(){
 
 showLeaderboard();
 
-
 positionPlayer();
 
 
 window.addEventListener(
     "resize",
-    positionPlayer
-);
+    function(){
 
+        positionPlayer();
 
-/* =====================================================
-   EXTRA MOBILE SAFETY
-===================================================== */
-
-document.addEventListener(
-    "touchmove",
-    function(e){
-
-        if(
-            gameRunning &&
-            e.cancelable
-        ){
-
-            e.preventDefault();
-
-        }
-
-    },
-    {
-        passive:false
     }
 );
 
-
 </script>
 
-
 </body>
-
 </html>
-```
