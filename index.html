@@ -1,0 +1,1938 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>আমাদের পরিবার - Good Deed Adventure</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#111;
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+}
+
+#game{
+    position:relative;
+    width:100%;
+    max-width:600px;
+    height:100vh;
+    margin:auto;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            #6ec9ff 0%,
+            #bfeaff 48%,
+            #79c96b 49%,
+            #3d963e 100%
+        );
+}
+
+/* SKY */
+
+#moon{
+    position:absolute;
+    right:25px;
+    top:65px;
+    font-size:55px;
+}
+
+.star{
+    position:absolute;
+    color:white;
+    font-size:18px;
+}
+
+/* HEADER */
+
+#header{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+
+    padding:9px;
+
+    display:flex;
+    justify-content:space-between;
+
+    background:rgba(255,255,255,.9);
+
+    z-index:50;
+
+    font-weight:bold;
+}
+
+.stat{
+    font-size:14px;
+}
+
+/* LEVEL */
+
+#levelBar{
+    position:absolute;
+    top:48px;
+    left:5%;
+    width:90%;
+    height:12px;
+
+    background:rgba(255,255,255,.6);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    z-index:50;
+}
+
+#levelProgress{
+    width:0%;
+    height:100%;
+    background:#087f23;
+}
+
+/* FAMILY */
+
+#family{
+    position:absolute;
+    bottom:120px;
+    left:0;
+
+    width:100%;
+    height:150px;
+
+    pointer-events:none;
+
+    z-index:8;
+}
+
+.character{
+    position:absolute;
+    bottom:0;
+
+    width:70px;
+    height:125px;
+
+    text-align:center;
+
+    filter:
+        drop-shadow(
+            0 5px 4px rgba(0,0,0,.3)
+        );
+}
+
+.character .head{
+    position:absolute;
+    top:5px;
+    left:15px;
+
+    width:40px;
+    height:40px;
+
+    background:#d99b72;
+
+    border-radius:50%;
+
+    border:3px solid #7a432d;
+
+    z-index:3;
+}
+
+.character .hair{
+    position:absolute;
+    top:1px;
+    left:13px;
+
+    width:44px;
+    height:20px;
+
+    background:#21160f;
+
+    border-radius:50% 50% 20% 20%;
+
+    z-index:5;
+}
+
+.character .body{
+    position:absolute;
+    top:43px;
+    left:8px;
+
+    width:54px;
+    height:60px;
+
+    border-radius:20px 20px 10px 10px;
+
+    border:3px solid rgba(0,0,0,.3);
+
+    box-shadow:
+        inset 0 8px 10px rgba(255,255,255,.25);
+}
+
+.character .legs{
+    position:absolute;
+    top:100px;
+    left:18px;
+
+    width:14px;
+    height:25px;
+
+    background:#222;
+
+    border-radius:8px;
+}
+
+.character .legs2{
+    position:absolute;
+    top:100px;
+    left:39px;
+
+    width:14px;
+    height:25px;
+
+    background:#222;
+
+    border-radius:8px;
+}
+
+.character .label{
+    position:absolute;
+    top:130px;
+    width:100%;
+
+    font-size:11px;
+    font-weight:bold;
+
+    color:#073b18;
+}
+
+#father{
+    left:7%;
+}
+
+#mother{
+    left:31%;
+}
+
+#daughter1{
+    left:54%;
+    transform:scale(.78);
+    transform-origin:bottom;
+}
+
+#daughter2{
+    left:73%;
+    transform:scale(.72);
+    transform-origin:bottom;
+}
+
+/* COLORS */
+
+#father .body{
+    background:#168447;
+}
+
+#mother .body{
+    background:#9b4cc7;
+}
+
+#daughter1 .body{
+    background:#ff7191;
+}
+
+#daughter2 .body{
+    background:#ffb52e;
+}
+
+/* OBJECTS */
+
+.object{
+    position:absolute;
+
+    width:55px;
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:38px;
+
+    z-index:20;
+
+    filter:
+        drop-shadow(
+            0 5px 4px rgba(0,0,0,.3)
+        );
+}
+
+/* PLAYER */
+
+#player{
+    position:absolute;
+
+    bottom:75px;
+
+    left:calc(50% - 55px);
+
+    width:110px;
+    height:42px;
+
+    background:#075f20;
+
+    border:4px solid #043c15;
+
+    border-radius:
+        0 0 25px 25px;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:11px;
+    font-weight:bold;
+
+    z-index:30;
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,.4);
+}
+
+/* CONTROLS */
+
+#controls{
+    position:absolute;
+
+    bottom:5px;
+    left:0;
+
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    gap:40px;
+
+    z-index:80;
+}
+
+.control{
+    width:90px;
+    height:62px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:
+        rgba(0,75,25,.9);
+
+    color:white;
+
+    font-size:32px;
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.35);
+
+    touch-action:none;
+}
+
+.control:active{
+    transform:scale(.9);
+}
+
+/* MESSAGE */
+
+#message{
+    position:absolute;
+
+    top:85px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:24px;
+    font-weight:bold;
+
+    opacity:0;
+
+    z-index:90;
+
+    pointer-events:none;
+}
+
+.messageShow{
+    animation:
+        messageAnimation .9s ease;
+}
+
+@keyframes messageAnimation{
+
+    0%{
+        opacity:0;
+        transform:scale(.5);
+    }
+
+    30%{
+        opacity:1;
+        transform:scale(1.2);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(1);
+    }
+}
+
+/* OVERLAY */
+
+#overlay{
+    position:absolute;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.72);
+
+    z-index:200;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+#panel{
+    width:94%;
+    max-width:450px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.5);
+}
+
+#panel h1{
+    color:#087f23;
+    margin-bottom:10px;
+    font-size:28px;
+}
+
+#panel p{
+    line-height:1.7;
+    margin-bottom:18px;
+}
+
+.mainButton{
+    width:100%;
+
+    padding:14px;
+
+    margin-top:8px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#087f23;
+
+    color:white;
+
+    font-size:18px;
+    font-weight:bold;
+}
+
+.secondaryButton{
+    background:#555;
+}
+
+/* FAMILY PREVIEW */
+
+#familyPreview{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+
+    margin:10px 0 20px;
+}
+
+.preview{
+    font-size:35px;
+}
+
+/* MISSION */
+
+#missionBox{
+    position:absolute;
+
+    top:70px;
+    left:5%;
+
+    width:90%;
+
+    background:
+        rgba(255,255,255,.9);
+
+    border-radius:12px;
+
+    padding:7px;
+
+    text-align:center;
+
+    font-size:13px;
+    font-weight:bold;
+
+    z-index:45;
+}
+
+/* LEADERBOARD */
+
+#leaderboard{
+    text-align:left;
+
+    margin-top:15px;
+
+    border-top:
+        2px solid #ddd;
+
+    padding-top:10px;
+}
+
+.leader{
+    display:flex;
+    justify-content:space-between;
+
+    padding:5px;
+
+    border-bottom:
+        1px solid #ddd;
+}
+
+/* LANDSCAPE */
+
+#landscape{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999;
+
+    background:#111;
+
+    color:white;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    font-size:22px;
+
+    padding:30px;
+}
+
+@media(
+    orientation:landscape
+    ) and (max-height:500px){
+
+    #landscape{
+        display:flex;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+    <!-- SKY -->
+
+    <div id="moon">🌙</div>
+
+    <div class="star" style="left:15%;top:100px">✦</div>
+    <div class="star" style="left:45%;top:125px">✦</div>
+    <div class="star" style="left:75%;top:145px">✦</div>
+
+    <!-- HEADER -->
+
+    <div id="header">
+
+        <div class="stat">
+            ⭐ <span id="score">0</span>
+        </div>
+
+        <div class="stat">
+            🪙 <span id="coins">0</span>
+        </div>
+
+        <div class="stat">
+            ❤️ <span id="lives">3</span>
+        </div>
+
+        <div class="stat">
+            L<span id="level">1</span>
+        </div>
+
+    </div>
+
+    <!-- PROGRESS -->
+
+    <div id="levelBar">
+        <div id="levelProgress"></div>
+    </div>
+
+    <!-- MISSION -->
+
+    <div id="missionBox">
+        🎯 মিশন:
+        <span id="mission">
+            ১০টি ভালো কাজ সংগ্রহ করুন
+        </span>
+    </div>
+
+    <!-- MESSAGE -->
+
+    <div id="message"></div>
+
+    <!-- FAMILY -->
+
+    <div id="family">
+
+        <!-- FATHER -->
+
+        <div class="character" id="father">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                বাবা
+            </div>
+
+        </div>
+
+        <!-- MOTHER -->
+
+        <div class="character" id="mother">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                মা
+            </div>
+
+        </div>
+
+        <!-- DAUGHTER 1 -->
+
+        <div class="character" id="daughter1">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                মেয়ে ১
+            </div>
+
+        </div>
+
+        <!-- DAUGHTER 2 -->
+
+        <div class="character" id="daughter2">
+
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+            <div class="legs2"></div>
+
+            <div class="label">
+                মেয়ে ২
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PLAYER -->
+
+    <div id="player">
+        GOOD DEEDS
+    </div>
+
+    <!-- CONTROLS -->
+
+    <div id="controls">
+
+        <button
+            class="control"
+            id="left">
+            ◀
+        </button>
+
+        <button
+            class="control"
+            id="right">
+            ▶
+        </button>
+
+    </div>
+
+    <!-- START / GAME OVER -->
+
+    <div id="overlay">
+
+        <div id="panel">
+
+            <h1>
+                🌙 আমাদের পরিবার
+            </h1>
+
+            <div id="familyPreview">
+                <span class="preview">👨</span>
+                <span class="preview">👩</span>
+                <span class="preview">👧</span>
+                <span class="preview">👧</span>
+            </div>
+
+            <p id="panelText">
+
+                ⭐ ভালো কাজ সংগ্রহ করুন<br>
+                🪙 কয়েন সংগ্রহ করুন<br>
+                💣 খারাপ জিনিস এড়িয়ে চলুন<br>
+                🎯 ১০টি মিশন সম্পূর্ণ করুন<br>
+                🏆 ১০টি লেভেল শেষ করুন
+
+            </p>
+
+            <button
+                class="mainButton"
+                id="start">
+                ▶ খেলা শুরু করুন
+            </button>
+
+            <button
+                class="mainButton secondaryButton"
+                id="sound">
+                🔊 শব্দ চালু করুন
+            </button>
+
+            <div id="leaderboard">
+
+                <b>🏆 সেরা স্কোর</b>
+
+                <div id="scores"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="landscape">
+    📱 ফোনটি সোজা করে ধরে খেলুন।
+</div>
+
+
+<script>
+
+/* =====================================================
+   GAME VARIABLES
+===================================================== */
+
+const game =
+    document.getElementById("game");
+
+const player =
+    document.getElementById("player");
+
+const scoreElement =
+    document.getElementById("score");
+
+const coinsElement =
+    document.getElementById("coins");
+
+const livesElement =
+    document.getElementById("lives");
+
+const levelElement =
+    document.getElementById("level");
+
+const progressElement =
+    document.getElementById("levelProgress");
+
+const missionElement =
+    document.getElementById("mission");
+
+const messageElement =
+    document.getElementById("message");
+
+const overlay =
+    document.getElementById("overlay");
+
+const panelText =
+    document.getElementById("panelText");
+
+const startButton =
+    document.getElementById("start");
+
+const soundButton =
+    document.getElementById("sound");
+
+const scoresElement =
+    document.getElementById("scores");
+
+const leftButton =
+    document.getElementById("left");
+
+const rightButton =
+    document.getElementById("right");
+
+
+let score = 0;
+
+let coins = 0;
+
+let lives = 3;
+
+let level = 1;
+
+let playerX = 0;
+
+let objects = [];
+
+let gameRunning = false;
+
+let animationFrame = 0;
+
+let lastSpawn = 0;
+
+let fallSpeed = 2.5;
+
+let spawnInterval = 1100;
+
+let missionCount = 0;
+
+let soundEnabled = false;
+
+
+/* =====================================================
+   LEVEL DATA
+===================================================== */
+
+const levels = [
+
+    {
+        target:100,
+        mission:"১০টি ভালো কাজ সংগ্রহ করুন",
+        missionTarget:10,
+        speed:2.5,
+        spawn:1100
+    },
+
+    {
+        target:250,
+        mission:"৫টি কয়েন সংগ্রহ করুন",
+        missionTarget:5,
+        speed:2.8,
+        spawn:1050
+    },
+
+    {
+        target:450,
+        mission:"১৫টি ভালো কাজ সংগ্রহ করুন",
+        missionTarget:15,
+        speed:3.1,
+        spawn:1000
+    },
+
+    {
+        target:700,
+        mission:"১০টি কয়েন সংগ্রহ করুন",
+        missionTarget:10,
+        speed:3.4,
+        spawn:950
+    },
+
+    {
+        target:1000,
+        mission:"২০টি ভালো কাজ সংগ্রহ করুন",
+        missionTarget:20,
+        speed:3.7,
+        spawn:900
+    },
+
+    {
+        target:1350,
+        mission:"১৫টি কয়েন সংগ্রহ করুন",
+        missionTarget:15,
+        speed:4.0,
+        spawn:850
+    },
+
+    {
+        target:1750,
+        mission:"২৫টি ভালো কাজ সংগ্রহ করুন",
+        missionTarget:25,
+        speed:4.3,
+        spawn:800
+    },
+
+    {
+        target:2200,
+        mission:"২০টি কয়েন সংগ্রহ করুন",
+        missionTarget:20,
+        speed:4.6,
+        spawn:750
+    },
+
+    {
+        target:2700,
+        mission:"৩০টি ভালো কাজ সংগ্রহ করুন",
+        missionTarget:30,
+        speed:5.0,
+        spawn:700
+    },
+
+    {
+        target:3300,
+        mission:"সব মিশন শেষ করুন",
+        missionTarget:1,
+        speed:5.4,
+        spawn:650
+    }
+
+];
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+let audioContext = null;
+
+let musicTimer = null;
+
+
+function initAudio(){
+
+    if(audioContext)
+        return;
+
+    audioContext =
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+}
+
+
+function beep(
+    frequency,
+    duration=0.12
+){
+
+    if(!soundEnabled)
+        return;
+
+    initAudio();
+
+    const oscillator =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+    oscillator.frequency.value =
+        frequency;
+
+    oscillator.type =
+        "sine";
+
+    gain.gain.value =
+        0.06;
+
+    oscillator.connect(gain);
+
+    gain.connect(
+        audioContext.destination
+    );
+
+    oscillator.start();
+
+    oscillator.stop(
+        audioContext.currentTime +
+        duration
+    );
+}
+
+
+/* Simple background melody */
+
+function startMusic(){
+
+    if(!soundEnabled)
+        return;
+
+    if(musicTimer)
+        return;
+
+    const notes =
+        [261,329,392,329,293,349,440,349];
+
+    let index=0;
+
+    musicTimer =
+        setInterval(()=>{
+
+            beep(
+                notes[index],
+                .18
+            );
+
+            index++;
+
+            if(index>=notes.length)
+                index=0;
+
+        },420);
+}
+
+
+function stopMusic(){
+
+    if(musicTimer){
+
+        clearInterval(
+            musicTimer
+        );
+
+        musicTimer=null;
+    }
+}
+
+
+/* =====================================================
+   BANGLA NARRATION
+===================================================== */
+
+function speak(text){
+
+    if(!soundEnabled)
+        return;
+
+    if(!("speechSynthesis" in window))
+        return;
+
+    speechSynthesis.cancel();
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+    speech.lang="bn-BD";
+
+    speech.rate=.9;
+
+    speech.pitch=1;
+
+    speech.volume=1;
+
+    speechSynthesis.speak(
+        speech
+    );
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+function startGame(){
+
+    score=0;
+
+    coins=0;
+
+    lives=3;
+
+    level=1;
+
+    missionCount=0;
+
+    objects.forEach(
+        o=>o.element.remove()
+    );
+
+    objects=[];
+
+    gameRunning=true;
+
+    overlay.style.display="none";
+
+    updateLevel();
+
+    updateDisplay();
+
+    playerX =
+        game.clientWidth/2 -
+        player.offsetWidth/2;
+
+    positionPlayer();
+
+    lastSpawn =
+        performance.now();
+
+    speak(
+        "খেলা শুরু হয়েছে। ভালো কাজ সংগ্রহ করুন।"
+    );
+
+    startMusic();
+
+    animationFrame =
+        requestAnimationFrame(
+            gameLoop
+        );
+}
+
+
+/* =====================================================
+   PLAYER
+===================================================== */
+
+function positionPlayer(){
+
+    const max =
+        game.clientWidth -
+        player.offsetWidth;
+
+    playerX =
+        Math.max(
+            0,
+            Math.min(
+                max,
+                playerX
+            )
+        );
+
+    player.style.left =
+        playerX+"px";
+}
+
+
+function moveLeft(){
+
+    if(!gameRunning)
+        return;
+
+    playerX-=45;
+
+    positionPlayer();
+}
+
+
+function moveRight(){
+
+    if(!gameRunning)
+        return;
+
+    playerX+=45;
+
+    positionPlayer();
+}
+
+
+/* =====================================================
+   TOUCH
+===================================================== */
+
+leftButton.addEventListener(
+    "touchstart",
+    e=>{
+        e.preventDefault();
+        moveLeft();
+    },
+    {passive:false}
+);
+
+
+rightButton.addEventListener(
+    "touchstart",
+    e=>{
+        e.preventDefault();
+        moveRight();
+    },
+    {passive:false}
+);
+
+
+/* =====================================================
+   MOUSE
+===================================================== */
+
+leftButton.addEventListener(
+    "mousedown",
+    moveLeft
+);
+
+rightButton.addEventListener(
+    "mousedown",
+    moveRight
+);
+
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.key==="ArrowLeft")
+            moveLeft();
+
+        if(e.key==="ArrowRight")
+            moveRight();
+
+    }
+);
+
+
+/* =====================================================
+   CREATE OBJECT
+===================================================== */
+
+function createObject(){
+
+    const element =
+        document.createElement("div");
+
+    element.className="object";
+
+    const random =
+        Math.random();
+
+    let type;
+
+    if(random<.55){
+
+        type="good";
+
+        const good=[
+            "⭐",
+            "🌟",
+            "❤️",
+            "📖",
+            "🤲",
+            "🕌"
+        ];
+
+        element.textContent =
+            good[
+                Math.floor(
+                    Math.random()*
+                    good.length
+                )
+            ];
+
+    }
+    else if(random<.80){
+
+        type="coin";
+
+        element.textContent="🪙";
+
+    }
+    else{
+
+        type="bad";
+
+        const bad=[
+            "💣",
+            "🔥",
+            "☁️"
+        ];
+
+        element.textContent =
+            bad[
+                Math.floor(
+                    Math.random()*
+                    bad.length
+                )
+            ];
+    }
+
+
+    const x =
+        Math.random() *
+        (game.clientWidth-55);
+
+
+    element.style.left =
+        x+"px";
+
+    element.style.top =
+        "-60px";
+
+    game.appendChild(element);
+
+
+    objects.push({
+
+        element:element,
+
+        x:x,
+
+        y:-60,
+
+        type:type
+
+    });
+}
+
+
+/* =====================================================
+   COLLISION
+===================================================== */
+
+function collision(obj){
+
+    const a =
+        player.getBoundingClientRect();
+
+    const b =
+        obj.element.getBoundingClientRect();
+
+    return !(
+        a.right<b.left ||
+        a.left>b.right ||
+        a.bottom<b.top ||
+        a.top>b.bottom
+    );
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+    text
+){
+
+    messageElement.textContent=text;
+
+    messageElement.className=
+        "messageShow";
+
+    setTimeout(
+        ()=>{
+            messageElement.className="";
+        },
+        900
+    );
+}
+
+
+/* =====================================================
+   GAME LOOP
+===================================================== */
+
+function gameLoop(timestamp){
+
+    if(!gameRunning)
+        return;
+
+
+    /* SPAWN */
+
+    if(
+        timestamp-lastSpawn >
+        spawnInterval
+    ){
+
+        createObject();
+
+        lastSpawn=timestamp;
+    }
+
+
+    /* MOVE */
+
+    for(
+        let i=objects.length-1;
+        i>=0;
+        i--
+    ){
+
+        const obj =
+            objects[i];
+
+        obj.y+=fallSpeed;
+
+        obj.element.style.top =
+            obj.y+"px";
+
+
+        /* COLLISION */
+
+        if(collision(obj)){
+
+            if(obj.type==="good"){
+
+                score+=10;
+
+                missionCount++;
+
+                showMessage(
+                    "⭐ +১০"
+                );
+
+                beep(660,.15);
+
+            }
+
+            else if(obj.type==="coin"){
+
+                coins++;
+
+                score+=5;
+
+                showMessage(
+                    "🪙 +১ কয়েন"
+                );
+
+                beep(880,.12);
+
+            }
+
+            else{
+
+                lives--;
+
+                showMessage(
+                    "💣 জীবন -১"
+                );
+
+                beep(150,.25);
+
+                speak(
+                    "সাবধান!"
+                );
+            }
+
+
+            obj.element.remove();
+
+            objects.splice(i,1);
+
+            updateDisplay();
+
+            checkMission();
+
+            checkLevel();
+
+
+            if(lives<=0){
+
+                endGame(false);
+
+                return;
+            }
+
+            continue;
+        }
+
+
+        /* MISSED */
+
+        if(
+            obj.y>
+            game.clientHeight
+        ){
+
+            if(obj.type==="good"){
+
+                lives--;
+
+                updateDisplay();
+
+                if(lives<=0){
+
+                    endGame(false);
+
+                    return;
+                }
+            }
+
+
+            obj.element.remove();
+
+            objects.splice(i,1);
+        }
+
+    }
+
+
+    animationFrame =
+        requestAnimationFrame(
+            gameLoop
+        );
+}
+
+
+/* =====================================================
+   DISPLAY
+===================================================== */
+
+function updateDisplay(){
+
+    scoreElement.textContent =
+        score;
+
+    coinsElement.textContent =
+        coins;
+
+    livesElement.textContent =
+        lives;
+
+    levelElement.textContent =
+        level;
+
+
+    const previous =
+        level===1
+        ? 0
+        : levels[level-2].target;
+
+    const current =
+        levels[level-1].target;
+
+    const percent =
+        Math.min(
+            100,
+            (
+                (score-previous) /
+                (current-previous)
+            )*100
+        );
+
+    progressElement.style.width =
+        Math.max(0,percent)+"%";
+}
+
+
+/* =====================================================
+   LEVEL
+===================================================== */
+
+function updateLevel(){
+
+    const data =
+        levels[level-1];
+
+    fallSpeed =
+        data.speed;
+
+    spawnInterval =
+        data.spawn;
+
+    missionElement.textContent =
+        data.mission;
+
+    missionCount=0;
+
+    updateDisplay();
+
+    speak(
+        "লেভেল "+level+
+        " শুরু হয়েছে। "+
+        data.mission
+    );
+}
+
+
+function checkLevel(){
+
+    if(level>=10){
+
+        if(
+            score>=
+            levels[9].target
+        ){
+
+            endGame(true);
+        }
+
+        return;
+    }
+
+
+    if(
+        score>=
+        levels[level-1].target
+    ){
+
+        level++;
+
+        showMessage(
+            "🎉 লেভেল "+level
+        );
+
+        beep(900,.2);
+
+        updateLevel();
+    }
+}
+
+
+/* =====================================================
+   MISSION
+===================================================== */
+
+function checkMission(){
+
+    const data =
+        levels[level-1];
+
+    if(
+        missionCount >=
+        data.missionTarget
+    ){
+
+        showMessage(
+            "🎯 মিশন সম্পূর্ণ!"
+        );
+
+        speak(
+            "মিশন সম্পূর্ণ হয়েছে। খুব ভালো!"
+        );
+
+        /* Bonus */
+
+        coins+=5;
+
+        score+=25;
+
+        missionCount=0;
+
+        updateDisplay();
+    }
+}
+
+
+/* =====================================================
+   GAME END
+===================================================== */
+
+function endGame(won){
+
+    gameRunning=false;
+
+    cancelAnimationFrame(
+        animationFrame
+    );
+
+    stopMusic();
+
+    objects.forEach(
+        o=>o.element.remove()
+    );
+
+    objects=[];
+
+
+    if(won){
+
+        panelText.innerHTML =
+            "🏆 <b>অভিনন্দন!</b><br><br>"+
+            "আপনি সব ১০টি লেভেল শেষ করেছেন।<br><br>"+
+            "⭐ স্কোর: <b>"+
+            score+
+            "</b><br>"+
+            "🪙 কয়েন: <b>"+
+            coins+
+            "</b>";
+
+        speak(
+            "অভিনন্দন! আপনি সব দশটি লেভেল শেষ করেছেন।"
+        );
+
+    }
+    else{
+
+        panelText.innerHTML =
+            "💔 <b>গেম ওভার</b><br><br>"+
+            "আপনি লেভেল "+
+            level+
+            " পর্যন্ত খেলেছেন।<br><br>"+
+            "⭐ স্কোর: <b>"+
+            score+
+            "</b><br>"+
+            "🪙 কয়েন: <b>"+
+            coins+
+            "</b>";
+
+        speak(
+            "গেম ওভার। আবার চেষ্টা করুন।"
+        );
+    }
+
+
+    saveScore();
+
+    showLeaderboard();
+
+    startButton.textContent =
+        "🔄 আবার খেলুন";
+
+    overlay.style.display="flex";
+}
+
+
+/* =====================================================
+   LOCAL LEADERBOARD
+===================================================== */
+
+function saveScore(){
+
+    let scores =
+        JSON.parse(
+            localStorage.getItem(
+                "goodDeedScores"
+            ) || "[]"
+        );
+
+
+    scores.push({
+
+        score:score,
+
+        coins:coins,
+
+        date:
+            new Date().toLocaleDateString()
+
+    });
+
+
+    scores.sort(
+        (a,b)=>
+            b.score-a.score
+    );
+
+
+    scores =
+        scores.slice(0,5);
+
+
+    localStorage.setItem(
+        "goodDeedScores",
+        JSON.stringify(scores)
+    );
+}
+
+
+function showLeaderboard(){
+
+    let scores =
+        JSON.parse(
+            localStorage.getItem(
+                "goodDeedScores"
+            ) || "[]"
+        );
+
+
+    if(scores.length===0){
+
+        scoresElement.innerHTML =
+            "<p>এখনও কোনো স্কোর নেই।</p>";
+
+        return;
+    }
+
+
+    scoresElement.innerHTML =
+        scores.map(
+            (s,i)=>
+                `<div class="leader">
+                    <span>
+                        ${i+1}. 🏆
+                    </span>
+
+                    <span>
+                        ⭐ ${s.score}
+                        🪙 ${s.coins}
+                    </span>
+                </div>`
+        ).join("");
+}
+
+
+/* =====================================================
+   SOUND BUTTON
+===================================================== */
+
+soundButton.addEventListener(
+    "click",
+    ()=>{
+
+        soundEnabled =
+            !soundEnabled;
+
+        if(soundEnabled){
+
+            initAudio();
+
+            if(
+                audioContext.state===
+                "suspended"
+            ){
+
+                audioContext.resume();
+            }
+
+            soundButton.textContent =
+                "🔊 শব্দ বন্ধ করুন";
+
+            speak(
+                "শব্দ চালু হয়েছে"
+            );
+
+            startMusic();
+
+        }
+        else{
+
+            soundButton.textContent =
+                "🔇 শব্দ চালু করুন";
+
+            stopMusic();
+
+            if(
+                "speechSynthesis"
+                in window
+            ){
+
+                speechSynthesis.cancel();
+            }
+        }
+    }
+);
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+startButton.addEventListener(
+    "click",
+    ()=>{
+
+        if(soundEnabled)
+            initAudio();
+
+        startGame();
+
+    }
+);
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+function shareGame(){
+
+    const text =
+        "আমি Good Deed Adventure খেলেছি! "+
+        "আমার স্কোর "+score+" ⭐";
+
+    if(
+        navigator.share
+    ){
+
+        navigator.share({
+
+            title:
+                "Good Deed Adventure",
+
+            text:text,
+
+            url:
+                window.location.href
+
+        });
+
+    }
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+showLeaderboard();
+
+positionPlayer();
+
+window.addEventListener(
+    "resize",
+    positionPlayer
+);
+
+</script>
+
+</body>
+</html>
+```
