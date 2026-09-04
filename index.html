@@ -1,7 +1,9 @@
 ```html
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -14,29 +16,59 @@
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+
     user-select:none;
     -webkit-user-select:none;
 }
 
-html,body{
+
+/* =====================================================
+   BODY
+===================================================== */
+
+html,
+body{
+
     width:100%;
     height:100%;
+
     overflow:hidden;
+
     background:#111;
-    font-family:"Noto Sans Bengali",Arial,sans-serif;
+
+    font-family:
+        "Noto Sans Bengali",
+        Arial,
+        sans-serif;
+
+    touch-action:none;
 }
 
+
+/* =====================================================
+   GAME
+===================================================== */
+
 #game{
+
     position:relative;
+
     width:100%;
     max-width:600px;
+
     height:100dvh;
     min-height:100vh;
+
     margin:auto;
+
     overflow:hidden;
 
     background:
@@ -46,34 +78,53 @@ html,body{
             #79c96b 49%,
             #3d963e 100%
         );
+
+    touch-action:none;
 }
 
-/* SKY */
+
+/* =====================================================
+   SKY
+===================================================== */
 
 #moon{
+
     position:absolute;
+
     right:25px;
     top:65px;
+
     font-size:55px;
 }
 
+
 .star{
+
     position:absolute;
+
     color:white;
+
     font-size:18px;
 }
 
-/* HEADER */
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 #header{
+
     position:absolute;
+
     top:0;
     left:0;
+
     width:100%;
 
     padding:9px;
 
     display:flex;
+
     justify-content:space-between;
 
     background:rgba(255,255,255,.9);
@@ -83,16 +134,24 @@ html,body{
     font-weight:bold;
 }
 
+
 .stat{
+
     font-size:14px;
 }
 
-/* LEVEL */
+
+/* =====================================================
+   LEVEL BAR
+===================================================== */
 
 #levelBar{
+
     position:absolute;
+
     top:48px;
     left:5%;
+
     width:90%;
     height:12px;
 
@@ -105,16 +164,27 @@ html,body{
     z-index:50;
 }
 
+
 #levelProgress{
+
     width:0%;
+
     height:100%;
+
     background:#087f23;
+
+    transition:width:.2s ease;
 }
 
-/* FAMILY */
+
+/* =====================================================
+   FAMILY
+===================================================== */
 
 #family{
+
     position:absolute;
+
     bottom:120px;
     left:0;
 
@@ -126,8 +196,11 @@ html,body{
     z-index:8;
 }
 
+
 .character{
+
     position:absolute;
+
     bottom:0;
 
     width:70px;
@@ -141,8 +214,11 @@ html,body{
         );
 }
 
+
 .character .head{
+
     position:absolute;
+
     top:5px;
     left:15px;
 
@@ -158,8 +234,11 @@ html,body{
     z-index:3;
 }
 
+
 .character .hair{
+
     position:absolute;
+
     top:1px;
     left:13px;
 
@@ -168,29 +247,40 @@ html,body{
 
     background:#21160f;
 
-    border-radius:50% 50% 20% 20%;
+    border-radius:
+        50% 50% 20% 20%;
 
     z-index:5;
 }
 
+
 .character .body{
+
     position:absolute;
+
     top:43px;
     left:8px;
 
     width:54px;
     height:60px;
 
-    border-radius:20px 20px 10px 10px;
+    border-radius:
+        20px 20px 10px 10px;
 
-    border:3px solid rgba(0,0,0,.3);
+    border:
+        3px solid rgba(0,0,0,.3);
 
     box-shadow:
-        inset 0 8px 10px rgba(255,255,255,.25);
+        inset
+        0 8px 10px
+        rgba(255,255,255,.25);
 }
 
+
 .character .legs{
+
     position:absolute;
+
     top:100px;
     left:18px;
 
@@ -202,8 +292,11 @@ html,body{
     border-radius:8px;
 }
 
+
 .character .legs2{
+
     position:absolute;
+
     top:100px;
     left:39px;
 
@@ -215,64 +308,94 @@ html,body{
     border-radius:8px;
 }
 
+
 .character .label{
+
     position:absolute;
+
     top:130px;
+
     width:100%;
 
     font-size:11px;
+
     font-weight:bold;
 
     color:#073b18;
 }
 
+
+/* =====================================================
+   FAMILY POSITIONS
+===================================================== */
+
 #father{
     left:7%;
 }
+
 
 #mother{
     left:31%;
 }
 
+
 #daughter1{
+
     left:54%;
+
     transform:scale(.78);
+
     transform-origin:bottom;
 }
+
 
 #daughter2{
+
     left:73%;
+
     transform:scale(.72);
+
     transform-origin:bottom;
 }
 
-/* COLORS */
+
+/* =====================================================
+   COLORS
+===================================================== */
 
 #father .body{
     background:#168447;
 }
 
+
 #mother .body{
     background:#9b4cc7;
 }
+
 
 #daughter1 .body{
     background:#ff7191;
 }
 
+
 #daughter2 .body{
     background:#ffb52e;
 }
 
-/* OBJECTS */
+
+/* =====================================================
+   FALLING OBJECTS
+===================================================== */
 
 .object{
+
     position:absolute;
 
     width:55px;
     height:55px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -284,11 +407,17 @@ html,body{
         drop-shadow(
             0 5px 4px rgba(0,0,0,.3)
         );
+
+    pointer-events:none;
 }
 
-/* PLAYER */
+
+/* =====================================================
+   PLAYER / GOOD DEEDS BOX
+===================================================== */
 
 #player{
+
     position:absolute;
 
     bottom:75px;
@@ -308,21 +437,51 @@ html,body{
     color:white;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     font-size:11px;
+
     font-weight:bold;
 
     z-index:30;
 
     box-shadow:
-        0 5px 12px rgba(0,0,0,.4);
+        0 5px 12px
+        rgba(0,0,0,.4);
+
+    /*
+       IMPORTANT:
+       Allow finger dragging on the player.
+    */
+
+    touch-action:none;
+
+    -webkit-user-select:none;
+    user-select:none;
+
+    cursor:grab;
+
+    will-change:left;
 }
 
-/* CONTROLS */
+
+#player:active{
+
+    cursor:grabbing;
+
+    transform:
+        scale(1.03);
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
 
 #controls{
+
     position:absolute;
 
     bottom:5px;
@@ -331,14 +490,21 @@ html,body{
     width:100%;
 
     display:flex;
+
     justify-content:center;
+
     gap:40px;
 
     z-index:1000;
+
     pointer-events:auto;
+
+    touch-action:none;
 }
 
+
 .control{
+
     width:90px;
     height:62px;
 
@@ -354,24 +520,38 @@ html,body{
     font-size:32px;
 
     box-shadow:
-        0 5px 10px rgba(0,0,0,.35);
+        0 5px 10px
+        rgba(0,0,0,.35);
 
     touch-action:none;
+
     -ms-touch-action:none;
-    -webkit-tap-highlight-color:transparent;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
     -webkit-touch-callout:none;
+
     cursor:pointer;
+
     appearance:none;
+
     -webkit-appearance:none;
 }
 
+
 .control:active{
+
     transform:scale(.9);
 }
 
-/* MESSAGE */
+
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 #message{
+
     position:absolute;
 
     top:85px;
@@ -381,6 +561,7 @@ html,body{
     text-align:center;
 
     font-size:24px;
+
     font-weight:bold;
 
     opacity:0;
@@ -390,32 +571,45 @@ html,body{
     pointer-events:none;
 }
 
+
 .messageShow{
+
     animation:
         messageAnimation .9s ease;
 }
 
+
 @keyframes messageAnimation{
 
     0%{
+
         opacity:0;
+
         transform:scale(.5);
     }
 
     30%{
+
         opacity:1;
+
         transform:scale(1.2);
     }
 
     100%{
+
         opacity:0;
+
         transform:scale(1);
     }
 }
 
-/* OVERLAY */
+
+/* =====================================================
+   OVERLAY
+===================================================== */
 
 #overlay{
+
     position:absolute;
 
     inset:0;
@@ -431,10 +625,15 @@ html,body{
     justify-content:center;
 
     padding:20px;
+
+    touch-action:auto;
 }
 
+
 #panel{
+
     width:94%;
+
     max-width:450px;
 
     max-height:90vh;
@@ -450,21 +649,31 @@ html,body{
     text-align:center;
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.5);
+        0 15px 40px
+        rgba(0,0,0,.5);
 }
 
+
 #panel h1{
+
     color:#087f23;
+
     margin-bottom:10px;
+
     font-size:28px;
 }
 
+
 #panel p{
+
     line-height:1.7;
+
     margin-bottom:18px;
 }
 
+
 .mainButton{
+
     width:100%;
 
     padding:14px;
@@ -480,30 +689,48 @@ html,body{
     color:white;
 
     font-size:18px;
+
     font-weight:bold;
+
+    touch-action:manipulation;
 }
 
+
 .secondaryButton{
+
     background:#555;
 }
 
-/* FAMILY PREVIEW */
+
+/* =====================================================
+   FAMILY PREVIEW
+===================================================== */
 
 #familyPreview{
+
     display:flex;
+
     justify-content:center;
+
     gap:12px;
 
-    margin:10px 0 20px;
+    margin:
+        10px 0 20px;
 }
 
+
 .preview{
+
     font-size:35px;
 }
 
-/* MISSION */
+
+/* =====================================================
+   MISSION
+===================================================== */
 
 #missionBox{
+
     position:absolute;
 
     top:70px;
@@ -521,14 +748,19 @@ html,body{
     text-align:center;
 
     font-size:13px;
+
     font-weight:bold;
 
     z-index:45;
 }
 
-/* LEADERBOARD */
+
+/* =====================================================
+   LEADERBOARD
+===================================================== */
 
 #leaderboard{
+
     text-align:left;
 
     margin-top:15px;
@@ -539,8 +771,11 @@ html,body{
     padding-top:10px;
 }
 
+
 .leader{
+
     display:flex;
+
     justify-content:space-between;
 
     padding:5px;
@@ -549,9 +784,13 @@ html,body{
         1px solid #ddd;
 }
 
-/* LANDSCAPE */
+
+/* =====================================================
+   LANDSCAPE
+===================================================== */
 
 #landscape{
+
     display:none;
 
     position:fixed;
@@ -565,6 +804,7 @@ html,body{
     color:white;
 
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
@@ -574,240 +814,452 @@ html,body{
     padding:30px;
 }
 
+
 @media(
     orientation:landscape
-    ) and (max-height:500px){
+) and (max-height:500px){
 
     #landscape{
+
         display:flex;
     }
 }
 
 
-/* FAMILY WALK ANIMATION */
+/* =====================================================
+   FAMILY WALK ANIMATION
+===================================================== */
+
 #family .character{
-    animation: familyWalk 0.55s ease-in-out infinite alternate;
+
+    animation:
+        familyWalk
+        0.55s
+        ease-in-out
+        infinite
+        alternate;
 }
-#family .character:nth-child(2){animation-delay:.12s}
-#family .character:nth-child(3){animation-delay:.24s}
-#family .character:nth-child(4){animation-delay:.36s}
+
+
+#family .character:nth-child(2){
+
+    animation-delay:.12s;
+}
+
+
+#family .character:nth-child(3){
+
+    animation-delay:.24s;
+}
+
+
+#family .character:nth-child(4){
+
+    animation-delay:.36s;
+}
+
 
 @keyframes familyWalk{
-    from{transform:translateY(0) rotate(-1deg)}
-    to{transform:translateY(-5px) rotate(1deg)}
-}
-#family .character:nth-child(3){
-    animation-name: familyWalkSmall;
-}
-#family .character:nth-child(4){
-    animation-name: familyWalkSmall2;
-}
-@keyframes familyWalkSmall{
-    from{transform:scale(.78) translateY(0) rotate(-2deg)}
-    to{transform:scale(.78) translateY(-5px) rotate(2deg)}
+
+    from{
+
+        transform:
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    to{
+
+        transform:
+            translateY(-5px)
+            rotate(1deg);
+    }
 }
 
+
+#family .character:nth-child(3){
+
+    animation-name:
+        familyWalkSmall;
+}
+
+
+#family .character:nth-child(4){
+
+    animation-name:
+        familyWalkSmall2;
+}
+
+
+@keyframes familyWalkSmall{
+
+    from{
+
+        transform:
+            scale(.78)
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    to{
+
+        transform:
+            scale(.78)
+            translateY(-5px)
+            rotate(2deg);
+    }
+}
+
+
 @keyframes familyWalkSmall2{
-    from{transform:scale(.72) translateY(0) rotate(-2deg)}
-    to{transform:scale(.72) translateY(-5px) rotate(2deg)}
+
+    from{
+
+        transform:
+            scale(.72)
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    to{
+
+        transform:
+            scale(.72)
+            translateY(-5px)
+            rotate(2deg);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    #player{
+
+        width:120px;
+
+        height:45px;
+
+        font-size:12px;
+    }
+
+    .control{
+
+        width:95px;
+
+        height:65px;
+
+        font-size:34px;
+    }
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div id="game">
 
-    <!-- SKY -->
 
-    <div id="moon">🌙</div>
+<!-- =====================================================
+     SKY
+===================================================== -->
 
-    <div class="star" style="left:15%;top:100px">✦</div>
-    <div class="star" style="left:45%;top:125px">✦</div>
-    <div class="star" style="left:75%;top:145px">✦</div>
+<div id="moon">🌙</div>
 
-    <!-- HEADER -->
+<div class="star"
+     style="left:15%;top:100px">
+    ✦
+</div>
 
-    <div id="header">
+<div class="star"
+     style="left:45%;top:125px">
+    ✦
+</div>
 
-        <div class="stat">
-            ⭐ <span id="score">0</span>
-        </div>
+<div class="star"
+     style="left:75%;top:145px">
+    ✦
+</div>
 
-        <div class="stat">
-            🪙 <span id="coins">0</span>
-        </div>
 
-        <div class="stat">
-            ❤️ <span id="lives">3</span>
-        </div>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        <div class="stat">
-            L<span id="level">1</span>
+<div id="header">
+
+    <div class="stat">
+        ⭐ <span id="score">0</span>
+    </div>
+
+    <div class="stat">
+        🪙 <span id="coins">0</span>
+    </div>
+
+    <div class="stat">
+        ❤️ <span id="lives">3</span>
+    </div>
+
+    <div class="stat">
+        L<span id="level">1</span>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PROGRESS
+===================================================== -->
+
+<div id="levelBar">
+
+    <div id="levelProgress"></div>
+
+</div>
+
+
+<!-- =====================================================
+     MISSION
+===================================================== -->
+
+<div id="missionBox">
+
+    🎯 মিশন:
+
+    <span id="mission">
+        ১০টি ভালো কাজ সংগ্রহ করুন
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     MESSAGE
+===================================================== -->
+
+<div id="message"></div>
+
+
+<!-- =====================================================
+     FAMILY
+===================================================== -->
+
+<div id="family">
+
+
+    <!-- FATHER -->
+
+    <div class="character"
+         id="father">
+
+        <div class="hair"></div>
+
+        <div class="head"></div>
+
+        <div class="body"></div>
+
+        <div class="legs"></div>
+
+        <div class="legs2"></div>
+
+        <div class="label">
+            বাবা
         </div>
 
     </div>
 
-    <!-- PROGRESS -->
 
-    <div id="levelBar">
-        <div id="levelProgress"></div>
-    </div>
+    <!-- MOTHER -->
 
-    <!-- MISSION -->
+    <div class="character"
+         id="mother">
 
-    <div id="missionBox">
-        🎯 মিশন:
-        <span id="mission">
-            ১০টি ভালো কাজ সংগ্রহ করুন
-        </span>
-    </div>
+        <div class="hair"></div>
 
-    <!-- MESSAGE -->
+        <div class="head"></div>
 
-    <div id="message"></div>
+        <div class="body"></div>
 
-    <!-- FAMILY -->
+        <div class="legs"></div>
 
-    <div id="family">
+        <div class="legs2"></div>
 
-        <!-- FATHER -->
-
-        <div class="character" id="father">
-
-            <div class="hair"></div>
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="legs"></div>
-            <div class="legs2"></div>
-
-            <div class="label">
-                বাবা
-            </div>
-
-        </div>
-
-        <!-- MOTHER -->
-
-        <div class="character" id="mother">
-
-            <div class="hair"></div>
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="legs"></div>
-            <div class="legs2"></div>
-
-            <div class="label">
-                মা
-            </div>
-
-        </div>
-
-        <!-- DAUGHTER 1 -->
-
-        <div class="character" id="daughter1">
-
-            <div class="hair"></div>
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="legs"></div>
-            <div class="legs2"></div>
-
-            <div class="label">
-                মেয়ে ১
-            </div>
-
-        </div>
-
-        <!-- DAUGHTER 2 -->
-
-        <div class="character" id="daughter2">
-
-            <div class="hair"></div>
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="legs"></div>
-            <div class="legs2"></div>
-
-            <div class="label">
-                মেয়ে ২
-            </div>
-
+        <div class="label">
+            মা
         </div>
 
     </div>
 
-    <!-- PLAYER -->
 
-    <div id="player">
-        GOOD DEEDS
+    <!-- DAUGHTER 1 -->
+
+    <div class="character"
+         id="daughter1">
+
+        <div class="hair"></div>
+
+        <div class="head"></div>
+
+        <div class="body"></div>
+
+        <div class="legs"></div>
+
+        <div class="legs2"></div>
+
+        <div class="label">
+            মেয়ে ১
+        </div>
+
     </div>
 
-    <!-- CONTROLS -->
 
-    <div id="controls">
+    <!-- DAUGHTER 2 -->
+
+    <div class="character"
+         id="daughter2">
+
+        <div class="hair"></div>
+
+        <div class="head"></div>
+
+        <div class="body"></div>
+
+        <div class="legs"></div>
+
+        <div class="legs2"></div>
+
+        <div class="label">
+            মেয়ে ২
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PLAYER
+===================================================== -->
+
+<div id="player">
+
+    GOOD DEEDS
+
+</div>
+
+
+<!-- =====================================================
+     BUTTON CONTROLS
+===================================================== -->
+
+<div id="controls">
+
+    <button
+        class="control"
+        id="left">
+
+        ◀
+
+    </button>
+
+
+    <button
+        class="control"
+        id="right">
+
+        ▶
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     START / GAME OVER
+===================================================== -->
+
+<div id="overlay">
+
+    <div id="panel">
+
+        <h1>
+            🌙 আমাদের পরিবার
+        </h1>
+
+
+        <div id="familyPreview">
+
+            <span class="preview">
+                👨
+            </span>
+
+            <span class="preview">
+                👩
+            </span>
+
+            <span class="preview">
+                👧
+            </span>
+
+            <span class="preview">
+                👧
+            </span>
+
+        </div>
+
+
+        <p id="panelText">
+
+            ⭐ ভালো কাজ সংগ্রহ করুন
+            <br>
+
+            🪙 কয়েন সংগ্রহ করুন
+            <br>
+
+            💣 খারাপ জিনিস এড়িয়ে চলুন
+            <br>
+
+            🎯 ১০টি মিশন সম্পূর্ণ করুন
+            <br>
+
+            🏆 ১০টি লেভেল শেষ করুন
+
+        </p>
+
 
         <button
-            class="control"
-            id="left">
-            ◀
+            class="mainButton"
+            id="start">
+
+            ▶ খেলা শুরু করুন
+
         </button>
+
 
         <button
-            class="control"
-            id="right">
-            ▶
+            class="mainButton secondaryButton"
+            id="sound">
+
+            🔊 শব্দ চালু করুন
+
         </button>
 
-    </div>
 
-    <!-- START / GAME OVER -->
+        <div id="leaderboard">
 
-    <div id="overlay">
+            <b>
+                🏆 সেরা স্কোর
+            </b>
 
-        <div id="panel">
-
-            <h1>
-                🌙 আমাদের পরিবার
-            </h1>
-
-            <div id="familyPreview">
-                <span class="preview">👨</span>
-                <span class="preview">👩</span>
-                <span class="preview">👧</span>
-                <span class="preview">👧</span>
-            </div>
-
-            <p id="panelText">
-
-                ⭐ ভালো কাজ সংগ্রহ করুন<br>
-                🪙 কয়েন সংগ্রহ করুন<br>
-                💣 খারাপ জিনিস এড়িয়ে চলুন<br>
-                🎯 ১০টি মিশন সম্পূর্ণ করুন<br>
-                🏆 ১০টি লেভেল শেষ করুন
-
-            </p>
-
-            <button
-                class="mainButton"
-                id="start">
-                ▶ খেলা শুরু করুন
-            </button>
-
-            <button
-                class="mainButton secondaryButton"
-                id="sound">
-                🔊 শব্দ চালু করুন
-            </button>
-
-            <div id="leaderboard">
-
-                <b>🏆 সেরা স্কোর</b>
-
-                <div id="scores"></div>
-
-            </div>
+            <div id="scores"></div>
 
         </div>
 
@@ -815,12 +1267,23 @@ html,body{
 
 </div>
 
+
+</div>
+
+
+<!-- =====================================================
+     LANDSCAPE WARNING
+===================================================== -->
+
 <div id="landscape">
+
     📱 ফোনটি সোজা করে ধরে খেলুন।
+
 </div>
 
 
 <script>
+
 
 /* =====================================================
    GAME VARIABLES
@@ -829,47 +1292,62 @@ html,body{
 const game =
     document.getElementById("game");
 
+
 const player =
     document.getElementById("player");
+
 
 const scoreElement =
     document.getElementById("score");
 
+
 const coinsElement =
     document.getElementById("coins");
+
 
 const livesElement =
     document.getElementById("lives");
 
+
 const levelElement =
     document.getElementById("level");
+
 
 const progressElement =
     document.getElementById("levelProgress");
 
+
 const missionElement =
     document.getElementById("mission");
+
 
 const messageElement =
     document.getElementById("message");
 
+
 const overlay =
     document.getElementById("overlay");
+
 
 const panelText =
     document.getElementById("panelText");
 
+
 const startButton =
     document.getElementById("start");
+
 
 const soundButton =
     document.getElementById("sound");
 
+
 const scoresElement =
     document.getElementById("scores");
 
+
 const leftButton =
     document.getElementById("left");
+
 
 const rightButton =
     document.getElementById("right");
@@ -1005,6 +1483,7 @@ function initAudio(){
     if(audioContext)
         return;
 
+
     audioContext =
         new (
             window.AudioContext ||
@@ -1022,52 +1501,69 @@ function beep(
     if(!soundEnabled)
         return;
 
+
     initAudio();
+
 
     const oscillator =
         audioContext.createOscillator();
 
+
     const gain =
         audioContext.createGain();
+
 
     oscillator.frequency.value =
         frequency;
 
+
     oscillator.type =
         "sine";
+
 
     gain.gain.value =
         0.06;
 
+
     oscillator.connect(gain);
+
 
     gain.connect(
         audioContext.destination
     );
 
+
     oscillator.start();
+
 
     oscillator.stop(
         audioContext.currentTime +
         duration
     );
+
 }
 
 
-/* Simple background melody */
+/* =====================================================
+   BACKGROUND MUSIC
+===================================================== */
 
 function startMusic(){
 
     if(!soundEnabled)
         return;
 
+
     if(musicTimer)
         return;
+
 
     const notes =
         [261,329,392,329,293,349,440,349];
 
+
     let index=0;
+
 
     musicTimer =
         setInterval(()=>{
@@ -1077,12 +1573,15 @@ function startMusic(){
                 .18
             );
 
+
             index++;
+
 
             if(index>=notes.length)
                 index=0;
 
         },420);
+
 }
 
 
@@ -1096,6 +1595,7 @@ function stopMusic(){
 
         musicTimer=null;
     }
+
 }
 
 
@@ -1108,13 +1608,17 @@ function speak(text){
     if(!soundEnabled)
         return;
 
+
     if(!("speechSynthesis" in window))
         return;
 
+
     speechSynthesis.cancel();
+
 
     const speech =
         new SpeechSynthesisUtterance(text);
+
 
     speech.lang="bn-BD";
 
@@ -1124,14 +1628,16 @@ function speak(text){
 
     speech.volume=1;
 
+
     speechSynthesis.speak(
         speech
     );
+
 }
 
 
 /* =====================================================
-   START
+   START GAME
 ===================================================== */
 
 function startGame(){
@@ -1146,44 +1652,56 @@ function startGame(){
 
     missionCount=0;
 
+
     objects.forEach(
         o=>o.element.remove()
     );
 
+
     objects=[];
+
 
     gameRunning=true;
 
+
     overlay.style.display="none";
+
 
     updateLevel();
 
     updateDisplay();
 
+
     playerX =
         game.clientWidth/2 -
         player.offsetWidth/2;
 
+
     positionPlayer();
+
 
     lastSpawn =
         performance.now();
+
 
     speak(
         "খেলা শুরু হয়েছে। ভালো কাজ সংগ্রহ করুন।"
     );
 
+
     startMusic();
+
 
     animationFrame =
         requestAnimationFrame(
             gameLoop
         );
+
 }
 
 
 /* =====================================================
-   PLAYER
+   PLAYER POSITION
 ===================================================== */
 
 function positionPlayer(){
@@ -1191,6 +1709,7 @@ function positionPlayer(){
     const max =
         game.clientWidth -
         player.offsetWidth;
+
 
     playerX =
         Math.max(
@@ -1201,22 +1720,27 @@ function positionPlayer(){
             )
         );
 
+
     player.style.left =
         Math.round(playerX)+"px";
 
-    /* Force an immediate visual update */
-    player.style.transform = "translateZ(0)";
 }
 
+
+/* =====================================================
+   BUTTON MOVEMENT
+===================================================== */
 
 function moveLeft(){
 
     if(!gameRunning)
         return;
 
+
     playerX-=45;
 
     positionPlayer();
+
 }
 
 
@@ -1225,92 +1749,426 @@ function moveRight(){
     if(!gameRunning)
         return;
 
+
     playerX+=45;
 
     positionPlayer();
+
 }
 
 
 /* =====================================================
-   MOBILE / TOUCH CONTROLS
+   BUTTON POINTER CONTROLS
 ===================================================== */
 
-/*
-   Android fix:
-   Use Pointer Events as the main control method.
-   This covers finger touch, mouse and stylus without
-   double-triggering on phones that support both pointer
-   and touch events.
-*/
+function handleMove(direction,e){
 
-function handleMove(direction, e){
     if(e){
-        if(e.cancelable) e.preventDefault();
+
+        if(e.cancelable)
+            e.preventDefault();
+
         e.stopPropagation();
+
     }
 
-    if(!gameRunning) return;
 
-    if(direction === "left"){
-        playerX -= 55;
-    }else{
-        playerX += 55;
+    if(!gameRunning)
+        return;
+
+
+    if(direction==="left"){
+
+        playerX-=55;
+
     }
+    else{
+
+        playerX+=55;
+
+    }
+
 
     positionPlayer();
+
 }
 
-/* Make the buttons very clearly tappable on Android */
-leftButton.style.touchAction = "none";
-rightButton.style.touchAction = "none";
 
-leftButton.addEventListener("pointerdown", function(e){
-    handleMove("left", e);
-});
+/* =====================================================
+   LEFT BUTTON
+===================================================== */
 
-rightButton.addEventListener("pointerdown", function(e){
-    handleMove("right", e);
-});
+leftButton.addEventListener(
+    "pointerdown",
+    function(e){
 
-/* Fallback for older Android browsers */
-leftButton.addEventListener("touchstart", function(e){
-    if(window.PointerEvent) return;
-    handleMove("left", e);
-}, {passive:false});
+        handleMove(
+            "left",
+            e
+        );
 
-rightButton.addEventListener("touchstart", function(e){
-    if(window.PointerEvent) return;
-    handleMove("right", e);
-}, {passive:false});
+    }
+);
 
-/* Prevent the phone from scrolling/zooming while playing */
-game.addEventListener("touchmove", function(e){
-    if(e.cancelable) e.preventDefault();
-}, {passive:false});
 
-game.addEventListener("gesturestart", function(e){
-    if(e.cancelable) e.preventDefault();
-}, {passive:false});
+/* =====================================================
+   RIGHT BUTTON
+===================================================== */
 
-document.addEventListener("contextmenu", function(e){
-    if(e.target.closest("#game")) e.preventDefault();
-});
+rightButton.addEventListener(
+    "pointerdown",
+    function(e){
+
+        handleMove(
+            "right",
+            e
+        );
+
+    }
+);
+
+
+/* =====================================================
+   OLD ANDROID FALLBACK
+===================================================== */
+
+leftButton.addEventListener(
+    "touchstart",
+    function(e){
+
+        if(window.PointerEvent)
+            return;
+
+
+        handleMove(
+            "left",
+            e
+        );
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+rightButton.addEventListener(
+    "touchstart",
+    function(e){
+
+        if(window.PointerEvent)
+            return;
+
+
+        handleMove(
+            "right",
+            e
+        );
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* =====================================================
+   IMPORTANT:
+   GOOD DEEDS DRAG SYSTEM
+===================================================== */
+
+let draggingPlayer = false;
+
+let touchStartX = 0;
+
+let touchStartPlayerX = 0;
+
+
+/* =====================================================
+   POINTER DOWN
+===================================================== */
+
+player.addEventListener(
+    "pointerdown",
+    function(e){
+
+        if(!gameRunning)
+            return;
+
+
+        draggingPlayer = true;
+
+
+        touchStartX =
+            e.clientX;
+
+
+        touchStartPlayerX =
+            playerX;
+
+
+        player.setPointerCapture(
+            e.pointerId
+        );
+
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    }
+);
+
+
+/* =====================================================
+   POINTER MOVE
+===================================================== */
+
+player.addEventListener(
+    "pointermove",
+    function(e){
+
+        if(!draggingPlayer)
+            return;
+
+
+        if(!gameRunning)
+            return;
+
+
+        const currentX =
+            e.clientX;
+
+
+        const deltaX =
+            currentX -
+            touchStartX;
+
+
+        playerX =
+            touchStartPlayerX +
+            deltaX;
+
+
+        positionPlayer();
+
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    }
+);
+
+
+/* =====================================================
+   POINTER UP
+===================================================== */
+
+player.addEventListener(
+    "pointerup",
+    function(e){
+
+        draggingPlayer=false;
+
+
+        try{
+
+            player.releasePointerCapture(
+                e.pointerId
+            );
+
+        }
+        catch(err){}
+
+    }
+);
+
+
+/* =====================================================
+   POINTER CANCEL
+===================================================== */
+
+player.addEventListener(
+    "pointercancel",
+    function(){
+
+        draggingPlayer=false;
+
+    }
+);
+
+
+/* =====================================================
+   ANDROID TOUCH FALLBACK
+===================================================== */
+
+player.addEventListener(
+    "touchstart",
+    function(e){
+
+        if(window.PointerEvent)
+            return;
+
+
+        if(!gameRunning)
+            return;
+
+
+        if(e.touches.length!==1)
+            return;
+
+
+        draggingPlayer=true;
+
+
+        touchStartX =
+            e.touches[0].clientX;
+
+
+        touchStartPlayerX =
+            playerX;
+
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+player.addEventListener(
+    "touchmove",
+    function(e){
+
+        if(window.PointerEvent)
+            return;
+
+
+        if(!draggingPlayer)
+            return;
+
+
+        if(e.touches.length!==1)
+            return;
+
+
+        const currentX =
+            e.touches[0].clientX;
+
+
+        const deltaX =
+            currentX -
+            touchStartX;
+
+
+        playerX =
+            touchStartPlayerX +
+            deltaX;
+
+
+        positionPlayer();
+
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+player.addEventListener(
+    "touchend",
+    function(){
+
+        draggingPlayer=false;
+
+    }
+);
+
+
+player.addEventListener(
+    "touchcancel",
+    function(){
+
+        draggingPlayer=false;
+
+    }
+);
+
+
+/* =====================================================
+   PREVENT GAME SCROLL
+===================================================== */
+
+game.addEventListener(
+    "touchmove",
+    function(e){
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* =====================================================
+   PREVENT ZOOM
+===================================================== */
+
+game.addEventListener(
+    "gesturestart",
+    function(e){
+
+        if(e.cancelable)
+            e.preventDefault();
+
+    }
+);
+
+
+document.addEventListener(
+    "contextmenu",
+    function(e){
+
+        if(e.target.closest("#game"))
+            e.preventDefault();
+
+    }
+);
+
 
 /* =====================================================
    MOUSE
 ===================================================== */
 
-leftButton.addEventListener("mousedown", function(e){
-    if(!window.PointerEvent){
-        moveLeft();
-    }
-});
+leftButton.addEventListener(
+    "mousedown",
+    function(){
 
-rightButton.addEventListener("mousedown", function(e){
-    if(!window.PointerEvent){
-        moveRight();
+        if(!window.PointerEvent)
+            moveLeft();
+
     }
-});
+);
+
+
+rightButton.addEventListener(
+    "mousedown",
+    function(){
+
+        if(!window.PointerEvent)
+            moveRight();
+
+    }
+);
 
 
 /* =====================================================
@@ -1323,6 +2181,7 @@ document.addEventListener(
 
         if(e.key==="ArrowLeft")
             moveLeft();
+
 
         if(e.key==="ArrowRight")
             moveRight();
@@ -1340,25 +2199,33 @@ function createObject(){
     const element =
         document.createElement("div");
 
+
     element.className="object";
+
 
     const random =
         Math.random();
 
+
     let type;
+
 
     if(random<.55){
 
         type="good";
 
+
         const good=[
+
             "⭐",
             "🌟",
             "❤️",
             "📖",
             "🤲",
             "🕌"
+
         ];
+
 
         element.textContent =
             good[
@@ -1369,6 +2236,8 @@ function createObject(){
             ];
 
     }
+
+
     else if(random<.80){
 
         type="coin";
@@ -1376,15 +2245,21 @@ function createObject(){
         element.textContent="🪙";
 
     }
+
+
     else{
 
         type="bad";
 
+
         const bad=[
+
             "💣",
             "🔥",
             "☁️"
+
         ];
+
 
         element.textContent =
             bad[
@@ -1393,6 +2268,7 @@ function createObject(){
                     bad.length
                 )
             ];
+
     }
 
 
@@ -1404,10 +2280,14 @@ function createObject(){
     element.style.left =
         x+"px";
 
+
     element.style.top =
         "-60px";
 
-    game.appendChild(element);
+
+    game.appendChild(
+        element
+    );
 
 
     objects.push({
@@ -1421,6 +2301,7 @@ function createObject(){
         type:type
 
     });
+
 }
 
 
@@ -1433,8 +2314,10 @@ function collision(obj){
     const a =
         player.getBoundingClientRect();
 
+
     const b =
         obj.element.getBoundingClientRect();
+
 
     return !(
         a.right<b.left ||
@@ -1442,6 +2325,7 @@ function collision(obj){
         a.bottom<b.top ||
         a.top>b.bottom
     );
+
 }
 
 
@@ -1449,21 +2333,24 @@ function collision(obj){
    MESSAGE
 ===================================================== */
 
-function showMessage(
-    text
-){
+function showMessage(text){
 
     messageElement.textContent=text;
+
 
     messageElement.className=
         "messageShow";
 
+
     setTimeout(
         ()=>{
+
             messageElement.className="";
+
         },
         900
     );
+
 }
 
 
@@ -1486,11 +2373,13 @@ function gameLoop(timestamp){
 
         createObject();
 
+
         lastSpawn=timestamp;
+
     }
 
 
-    /* MOVE */
+    /* MOVE OBJECTS */
 
     for(
         let i=objects.length-1;
@@ -1501,7 +2390,9 @@ function gameLoop(timestamp){
         const obj =
             objects[i];
 
+
         obj.y+=fallSpeed;
+
 
         obj.element.style.top =
             obj.y+"px";
@@ -1517,13 +2408,16 @@ function gameLoop(timestamp){
 
                 missionCount++;
 
+
                 showMessage(
                     "⭐ +১০"
                 );
 
+
                 beep(660,.15);
 
             }
+
 
             else if(obj.type==="coin"){
 
@@ -1531,33 +2425,45 @@ function gameLoop(timestamp){
 
                 score+=5;
 
+
                 showMessage(
                     "🪙 +১ কয়েন"
                 );
+
 
                 beep(880,.12);
 
             }
 
+
             else{
 
                 lives--;
+
 
                 showMessage(
                     "💣 জীবন -১"
                 );
 
+
                 beep(150,.25);
+
 
                 speak(
                     "সাবধান!"
                 );
+
             }
 
 
             obj.element.remove();
 
-            objects.splice(i,1);
+
+            objects.splice(
+                i,
+                1
+            );
+
 
             updateDisplay();
 
@@ -1571,9 +2477,12 @@ function gameLoop(timestamp){
                 endGame(false);
 
                 return;
+
             }
 
+
             continue;
+
         }
 
 
@@ -1590,18 +2499,26 @@ function gameLoop(timestamp){
 
                 updateDisplay();
 
+
                 if(lives<=0){
 
                     endGame(false);
 
                     return;
+
                 }
+
             }
 
 
             obj.element.remove();
 
-            objects.splice(i,1);
+
+            objects.splice(
+                i,
+                1
+            );
+
         }
 
     }
@@ -1611,6 +2528,7 @@ function gameLoop(timestamp){
         requestAnimationFrame(
             gameLoop
         );
+
 }
 
 
@@ -1623,11 +2541,14 @@ function updateDisplay(){
     scoreElement.textContent =
         score;
 
+
     coinsElement.textContent =
         coins;
 
+
     livesElement.textContent =
         lives;
+
 
     levelElement.textContent =
         level;
@@ -1638,8 +2559,10 @@ function updateDisplay(){
         ? 0
         : levels[level-2].target;
 
+
     const current =
         levels[level-1].target;
+
 
     const percent =
         Math.min(
@@ -1650,8 +2573,13 @@ function updateDisplay(){
             )*100
         );
 
+
     progressElement.style.width =
-        Math.max(0,percent)+"%";
+        Math.max(
+            0,
+            percent
+        )+"%";
+
 }
 
 
@@ -1664,26 +2592,37 @@ function updateLevel(){
     const data =
         levels[level-1];
 
+
     fallSpeed =
         data.speed;
+
 
     spawnInterval =
         data.spawn;
 
+
     missionElement.textContent =
         data.mission;
 
+
     missionCount=0;
 
+
     updateDisplay();
+
 
     speak(
         "লেভেল "+level+
         " শুরু হয়েছে। "+
         data.mission
     );
+
 }
 
+
+/* =====================================================
+   CHECK LEVEL
+===================================================== */
 
 function checkLevel(){
 
@@ -1695,9 +2634,12 @@ function checkLevel(){
         ){
 
             endGame(true);
+
         }
 
+
         return;
+
     }
 
 
@@ -1708,14 +2650,19 @@ function checkLevel(){
 
         level++;
 
+
         showMessage(
             "🎉 লেভেল "+level
         );
 
+
         beep(900,.2);
 
+
         updateLevel();
+
     }
+
 }
 
 
@@ -1728,6 +2675,7 @@ function checkMission(){
     const data =
         levels[level-1];
 
+
     if(
         missionCount >=
         data.missionTarget
@@ -1737,20 +2685,24 @@ function checkMission(){
             "🎯 মিশন সম্পূর্ণ!"
         );
 
+
         speak(
             "মিশন সম্পূর্ণ হয়েছে। খুব ভালো!"
         );
 
-        /* Bonus */
 
         coins+=5;
 
         score+=25;
 
+
         missionCount=0;
 
+
         updateDisplay();
+
     }
+
 }
 
 
@@ -1762,15 +2714,19 @@ function endGame(won){
 
     gameRunning=false;
 
+
     cancelAnimationFrame(
         animationFrame
     );
 
+
     stopMusic();
+
 
     objects.forEach(
         o=>o.element.remove()
     );
+
 
     objects=[];
 
@@ -1787,11 +2743,14 @@ function endGame(won){
             coins+
             "</b>";
 
+
         speak(
             "অভিনন্দন! আপনি সব দশটি লেভেল শেষ করেছেন।"
         );
 
     }
+
+
     else{
 
         panelText.innerHTML =
@@ -1806,25 +2765,31 @@ function endGame(won){
             coins+
             "</b>";
 
+
         speak(
             "গেম ওভার। আবার চেষ্টা করুন।"
         );
+
     }
 
 
     saveScore();
 
+
     showLeaderboard();
+
 
     startButton.textContent =
         "🔄 আবার খেলুন";
 
+
     overlay.style.display="flex";
+
 }
 
 
 /* =====================================================
-   LOCAL LEADERBOARD
+   LEADERBOARD
 ===================================================== */
 
 function saveScore(){
@@ -1844,7 +2809,8 @@ function saveScore(){
         coins:coins,
 
         date:
-            new Date().toLocaleDateString()
+            new Date()
+            .toLocaleDateString()
 
     });
 
@@ -1856,13 +2822,17 @@ function saveScore(){
 
 
     scores =
-        scores.slice(0,5);
+        scores.slice(
+            0,
+            5
+        );
 
 
     localStorage.setItem(
         "goodDeedScores",
         JSON.stringify(scores)
     );
+
 }
 
 
@@ -1881,14 +2851,18 @@ function showLeaderboard(){
         scoresElement.innerHTML =
             "<p>এখনও কোনো স্কোর নেই।</p>";
 
+
         return;
+
     }
 
 
     scoresElement.innerHTML =
         scores.map(
             (s,i)=>
+
                 `<div class="leader">
+
                     <span>
                         ${i+1}. 🏆
                     </span>
@@ -1897,8 +2871,11 @@ function showLeaderboard(){
                         ⭐ ${s.score}
                         🪙 ${s.coins}
                     </span>
+
                 </div>`
+
         ).join("");
+
 }
 
 
@@ -1913,9 +2890,11 @@ soundButton.addEventListener(
         soundEnabled =
             !soundEnabled;
 
+
         if(soundEnabled){
 
             initAudio();
+
 
             if(
                 audioContext.state===
@@ -1923,24 +2902,32 @@ soundButton.addEventListener(
             ){
 
                 audioContext.resume();
+
             }
+
 
             soundButton.textContent =
                 "🔊 শব্দ বন্ধ করুন";
+
 
             speak(
                 "শব্দ চালু হয়েছে"
             );
 
+
             startMusic();
 
         }
+
+
         else{
 
             soundButton.textContent =
                 "🔇 শব্দ চালু করুন";
 
+
             stopMusic();
+
 
             if(
                 "speechSynthesis"
@@ -1948,8 +2935,11 @@ soundButton.addEventListener(
             ){
 
                 speechSynthesis.cancel();
+
             }
+
         }
+
     }
 );
 
@@ -1964,6 +2954,7 @@ startButton.addEventListener(
 
         if(soundEnabled)
             initAudio();
+
 
         startGame();
 
@@ -1980,6 +2971,7 @@ function shareGame(){
     const text =
         "আমি Good Deed Adventure খেলেছি! "+
         "আমার স্কোর "+score+" ⭐";
+
 
     if(
         navigator.share
@@ -1998,6 +2990,7 @@ function shareGame(){
         });
 
     }
+
 }
 
 
@@ -2007,15 +3000,44 @@ function shareGame(){
 
 showLeaderboard();
 
+
 positionPlayer();
+
 
 window.addEventListener(
     "resize",
     positionPlayer
 );
 
+
+/* =====================================================
+   EXTRA MOBILE SAFETY
+===================================================== */
+
+document.addEventListener(
+    "touchmove",
+    function(e){
+
+        if(
+            gameRunning &&
+            e.cancelable
+        ){
+
+            e.preventDefault();
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
+
+
 </script>
 
+
 </body>
+
 </html>
 ```
